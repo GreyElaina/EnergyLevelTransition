@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "moegtech",
+  "version": "${version}",
+
+  "name": "MoegTech",
+  "description": "Take Minecraft to a new level of complexity",
+  "authors": [
+    "TeamMoeg"
+  ],
+  "contact": {
+    "homepage": "https://wordpress.terrafirmarescue.net/",
+    "sources": "https://github.com/yuesha/moegtech/"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/moegtech/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.yuesha.moegtech.MoegTech_Main"
+    ],
+    "rei_plugins_v0": [
+      "me.shedaniel.rei.plugin.DefaultPlugin"
+    ]
+  },
+  "mixins": [
+    "moegtech.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.16.x"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}
