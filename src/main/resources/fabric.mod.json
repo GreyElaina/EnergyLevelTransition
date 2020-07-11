@@ -1,32 +1,32 @@
 {
   "schemaVersion": 1,
-  "id": "moegtech",
+  "id": "elt",
   "version": "${version}",
 
-  "name": "MoegTech",
+  "name": "Energy Level Transition",
   "description": "Take Minecraft to a new level of complexity",
   "authors": [
     "TeamMoeg"
   ],
   "contact": {
     "homepage": "https://wordpress.terrafirmarescue.net/",
-    "sources": "https://github.com/yuesha/moegtech/"
+    "sources": "https://github.com/MoegTech/EnergyLevelTransition"
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/moegtech/icon.png",
+  "icon": "assets/elt/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.yuesha.moegtech.MoegTech_Main"
+      "net.yuesha.elt.ELT_Main"
     ],
     "rei_plugins_v0": [
       "me.shedaniel.rei.plugin.DefaultPlugin"
     ]
   },
   "mixins": [
-    "moegtech.mixins.json"
+    "elt.mixins.json"
   ],
 
   "depends": {

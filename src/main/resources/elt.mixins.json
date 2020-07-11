@@ -1,12 +1,12 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.yuesha.moegtech.mixin",
+  "package": "net.yuesha.elt.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
   ],
   "client": [
-    "MoegTech_Mixin"
+    "ELT_Mixin"
   ],
   "injectors": {
     "defaultRequire": 1

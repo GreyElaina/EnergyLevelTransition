@@ -1,4 +1,6 @@
-# MoegTech
+# Energy Level Transition
+
+Minecraft Fabric 1.16.1 Mod
 
 ## Setup
 
