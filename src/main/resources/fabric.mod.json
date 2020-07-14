@@ -19,10 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.yuesha.elt.ELT_Main"
-    ],
-    "rei_plugins_v0": [
-      "me.shedaniel.rei.plugin.DefaultPlugin"
+      "net.moeg.elt.ELT_Main"
     ]
   },
   "mixins": [

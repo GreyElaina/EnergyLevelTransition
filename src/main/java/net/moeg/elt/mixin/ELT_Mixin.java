@@ -1,4 +1,4 @@
-package net.yuesha.elt.mixin;
+package net.moeg.elt.mixin;
 
 import net.minecraft.client.gui.screen.TitleScreen;
 import org.spongepowered.asm.mixin.Mixin;
