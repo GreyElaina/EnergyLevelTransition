@@ -1,4 +1,4 @@
-package net.moeg.elt.api.items;
+package net.moeg.elt.items;
 
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.player.PlayerEntity;
