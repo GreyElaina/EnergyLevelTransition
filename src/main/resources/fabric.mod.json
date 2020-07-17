@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "net.moeg.elt.ELT_Main"
+    ],
+    "client": [
+      "net.moeg.elt.ELT_Main_Client"
     ]
   },
   "mixins": [

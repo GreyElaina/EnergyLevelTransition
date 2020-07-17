@@ -1,6 +1,10 @@
 {
   "item.elt.symbol": "Symbol",
   "item.elt.symbol.tooltip": "The Symbol of ELT",
+
+  "block.elt.wood_cutter": "Manual Wood Cutter",
+  "container.woodcutter": "Manual Wood Cutter",
+
   "itemGroup.elt.material": "ELT: Materials",
   "itemGroup.elt.tools": "ELT: Tools",
   "itemGroup.elt.food": "ELT: Food",
