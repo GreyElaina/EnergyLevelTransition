@@ -39,7 +39,8 @@ dependencies {
 
 	// Libs
 	//modImplementation "io.github.cottonmc:LibGui:2.2.0+1.16.1"
-	//modImplementation group: 'net.devtech', name: 'arrp', version: '0.2.4'
+	modImplementation group: 'net.devtech', name: 'arrp', version: '0.2.4'
+	include group: 'net.devtech', name: 'arrp', version: '0.2.4'
 
 
 
