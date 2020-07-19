@@ -14,6 +14,7 @@ import net.minecraft.util.registry.Registry;
 import net.moeg.elt.blocks.ExampleBlock;
 import net.moeg.elt.blocks.WoodCutterBlock;
 
+import static net.moeg.elt.ELT_Main.*;
 import static net.moeg.elt.api.data.CS.*;
 
 /**
@@ -32,9 +33,6 @@ import static net.moeg.elt.api.data.CS.*;
  * */
 
 public class Loader_Blocks {
-
-    public static final RuntimeResourcePack BLOCK_RESOURCE = RuntimeResourcePack.create("elt:block");
-
 
     public static final Block EXAMPLE_BLOCK;
     public static final Block MANUAL_WOOD_CUTTER;
@@ -87,37 +85,37 @@ public class Loader_Blocks {
     private static void registerBlockState(boolean isCustomBlockState, String path) {
         if (!isCustomBlockState) {
             Identifier resourceId = new Identifier("elt", path);
-            BLOCK_RESOURCE.addBlockState(JState.state(JState.variant(JState.model("elt:block/"+path))), resourceId);
+            RESOURCE_PACK.addBlockState(JState.state(JState.variant(JState.model("elt:block/"+path))), resourceId);
         }
     }
 
     private static void registerModel(boolean isCustomModel, String path, String parent) {
         if (!isCustomModel) {
             Identifier resourceId = new Identifier("elt", "block/" + path);
-            BLOCK_RESOURCE.addModel(JModel.model(parent).textures(JModel.textures().var("all", "elt:block/" + path).particle("#all")), resourceId);
+            RESOURCE_PACK.addModel(JModel.model(parent).textures(JModel.textures().var("all", "elt:block/" + path).particle("#all")), resourceId);
         }
     }
 
     private static void registerBlockItemModel(String path) {
         Identifier resourceId = new Identifier("elt", "item/" + path);
-        BLOCK_RESOURCE.addModel(JModel.model("elt:block/"+path), resourceId);
+        RESOURCE_PACK.addModel(JModel.model("elt:block/"+path), resourceId);
     }
 
     private static void registerModel(boolean isCustomModel, String path) {
         if (!isCustomModel) {
             Identifier resourceId = new Identifier("elt", "block/" + path);
-            BLOCK_RESOURCE.addModel(JModel.model("block/cube_all").textures(JModel.textures().var("all", "elt:block/" + path).particle("#all")), resourceId);
+            RESOURCE_PACK.addModel(JModel.model("block/cube_all").textures(JModel.textures().var("all", "elt:block/" + path).particle("#all")), resourceId);
         }
     }
 
-    private static void registerLang(String path, String language, String translatedText) {
-        Identifier langId = new Identifier("elt", language);
-        BLOCK_RESOURCE.addLang(langId, JLang.lang().translate("block.elt."+path, translatedText));
+    private static void registerLang(String path, String language, String name) {
+        if (language.equalsIgnoreCase("en_us")) RESOURCE_PACK.addLang(new Identifier("elt", language), EN_US.translate("block.elt."+path, name));
+        if (language.equalsIgnoreCase("zh_cn")) RESOURCE_PACK.addLang(new Identifier("elt", language), ZH_CN.translate("block.elt."+path, name));
     }
 
     private static void registerAnimation(String path, int frametime) {
         Identifier aniID = new Identifier("elt", "block/"+path);
-        BLOCK_RESOURCE.addAnimation(aniID, JAnimation.animation().frameTime(frametime));
+        RESOURCE_PACK.addAnimation(aniID, JAnimation.animation().frameTime(frametime));
     }
 
     static {

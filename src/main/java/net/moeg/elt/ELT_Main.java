@@ -2,6 +2,7 @@ package net.moeg.elt;
 
 import net.devtech.arrp.api.RRPCallback;
 import net.devtech.arrp.api.RuntimeResourcePack;
+import net.devtech.arrp.json.lang.JLang;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.registry.Registry;
@@ -12,17 +13,18 @@ import net.moeg.elt.loaders.Loader_Items;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static net.moeg.elt.loaders.Loader_Blocks.BLOCK_RESOURCE;
 import static net.moeg.elt.loaders.Loader_Blocks.EXAMPLE_BLOCK;
 import static net.devtech.arrp.api.RuntimeResourcePack.*;
 import static net.devtech.arrp.json.loot.JLootTable.*;
-import static net.moeg.elt.loaders.Loader_Items.ITEM_RESOURCE;
 
 public class ELT_Main implements ModInitializer {
 
 	public static final String MOD_ID = "elt";
 	public static final RuntimeResourcePack RESOURCE_PACK = RuntimeResourcePack.create("elt:main");
 	public static final Logger LOGGER = LogManager.getFormatterLogger("Energy Level Transition");
+
+	public static JLang EN_US = JLang.lang();
+	public static JLang ZH_CN = JLang.lang();
 
 	/** Load the ItemGroups */
 	public static final ItemGroups_ELT ITEM_GROUPS_ELT = new ItemGroups_ELT();
@@ -66,8 +68,6 @@ public class ELT_Main implements ModInitializer {
 		);
 
 		RRPCallback.EVENT.register(a -> a.add(RESOURCE_PACK)); // register arrp resourcepack
-		RRPCallback.EVENT.register(a -> a.add(ITEM_RESOURCE));
-		RRPCallback.EVENT.register(a -> a.add(BLOCK_RESOURCE));
 
 		DEMO_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, "elt:demo", BlockEntityType.Builder.create(DemoBlockEntity::new, EXAMPLE_BLOCK).build(null));
 
