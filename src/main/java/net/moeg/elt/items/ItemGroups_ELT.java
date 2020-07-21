@@ -5,7 +5,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
-import static net.moeg.elt.loaders.Loader_Items.*;
+import static net.moeg.elt.handlers.Handler_Items.*;
 
 public class ItemGroups_ELT {
 

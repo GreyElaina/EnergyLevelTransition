@@ -1,13 +1,11 @@
-package net.moeg.elt.loaders;
+package net.moeg.elt.handlers;
 
-import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.json.animation.JAnimation;
 import net.devtech.arrp.json.models.JModel;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ToolItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.moeg.elt.items.ItemBase;
@@ -33,23 +31,12 @@ import static net.moeg.elt.ELT_Main.*;
  * 如果要注册方块的物品形态
  * static {
  *
- *         EXAMPLE_BLOCK = register(Loader_Blocks.EXAMPLE_BLOCK, ItemGroups_ELT.ELT_MACHINE);
+ *         EXAMPLE_BLOCK = register(Handler_Blocks.EXAMPLE_BLOCK, ItemGroups_ELT.ELT_MACHINE);
  *
  *     }
  *
  * */
-public class Loader_Items {
-
-    public static final Item Flint_Shovel;
-
-    public static final Item
-        ELT_SYMBOL,
-        OAK_BRANCH, BRICH_BRANCH,
-        Flint_Adze, Flint_Awl, Flint_Axe, Flint_Knife, Flint_Spear, Flint_Scraper, Flint_Harpoon, Flint_Hammer,
-        Head_Flint_Shovel, Head_Flint_Axe, Head_Flint_Knife, Head_Flint_Spear, Head_Flint_Harpoon, Head_Flint_Hammer,
-
-        //Blockitems
-        EXAMPLE_BLOCK, MANUAL_WOOD_CUTTER, EXAMPLE_2;
+public class Handler_Items {
 
     /** Methods with Block Item. */
 
@@ -184,6 +171,15 @@ public class Loader_Items {
         RESOURCE_PACK.addAnimation(aniID, JAnimation.animation().frameTime(frametime));
     }
 
+    public static final Item
+            ELT_SYMBOL,
+            OAK_BRANCH, BRICH_BRANCH,
+            Flint_Adze, Flint_Awl, Flint_Axe, Flint_Knife, Flint_Shovel, Flint_Spear, Flint_Scraper, Flint_Harpoon, Flint_Hammer,
+            Head_Flint_Shovel, Head_Flint_Axe, Head_Flint_Knife, Head_Flint_Spear, Head_Flint_Harpoon, Head_Flint_Hammer,
+
+    //Blockitems
+    EXAMPLE_BLOCK, MANUAL_WOOD_CUTTER, EXAMPLE_2;
+
     static {
         ELT_SYMBOL = register("symbol", "Symbol", "能级跃迁", "", "", new ItemTooltip((new Item.Settings()).group(ItemGroups_ELT.ELT_MISC)));
         OAK_BRANCH = register("oak_branch", "Oak Branch", "橡木树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(ItemGroups_ELT.ELT_MATERIAL)));
@@ -208,9 +204,9 @@ public class Loader_Items {
         Flint_Hammer  = register("tool/flint_hammer" , "Flint Hammer" , "燧石锤"  , new ToolHarpoon(ToolMaterials_ELT.CHIPPED_FLINT, (new Item.Settings())));
 
         //blockitems
-        EXAMPLE_BLOCK = register(Loader_Blocks.EXAMPLE_BLOCK, ItemGroups_ELT.ELT_MACHINE);
-        MANUAL_WOOD_CUTTER = register(Loader_Blocks.MANUAL_WOOD_CUTTER, ItemGroups_ELT.ELT_MACHINE);
-        EXAMPLE_2 = register(Loader_Blocks.EXAMPLE_2, ItemGroups_ELT.ELT_MACHINE);
+        EXAMPLE_BLOCK = register(Handler_Blocks.EXAMPLE_BLOCK, ItemGroups_ELT.ELT_MACHINE);
+        MANUAL_WOOD_CUTTER = register(Handler_Blocks.MANUAL_WOOD_CUTTER, ItemGroups_ELT.ELT_MACHINE);
+        EXAMPLE_2 = register(Handler_Blocks.EXAMPLE_2, ItemGroups_ELT.ELT_MACHINE);
 
     }
 

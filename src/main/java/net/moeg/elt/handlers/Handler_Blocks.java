@@ -1,4 +1,4 @@
-package net.moeg.elt.loaders;
+package net.moeg.elt.handlers;
 
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.json.animation.JAnimation;
@@ -32,7 +32,7 @@ import static net.moeg.elt.api.data.CS.*;
  *
  * */
 
-public class Loader_Blocks {
+public class Handler_Blocks {
 
     public static final Block EXAMPLE_BLOCK;
     public static final Block MANUAL_WOOD_CUTTER;

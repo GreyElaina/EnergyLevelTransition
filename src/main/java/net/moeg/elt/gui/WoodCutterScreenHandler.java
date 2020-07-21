@@ -23,7 +23,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.World;
 import net.moeg.elt.handlers.ScreenHandlerTypeELT;
 
-import static net.moeg.elt.loaders.Loader_Blocks.*;
+import static net.moeg.elt.handlers.Handler_Blocks.*;
 
 public class WoodCutterScreenHandler extends ScreenHandler {
     private final ScreenHandlerContext context;

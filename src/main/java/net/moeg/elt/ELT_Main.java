@@ -8,12 +8,12 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.registry.Registry;
 import net.moeg.elt.blockentity.DemoBlockEntity;
 import net.moeg.elt.items.ItemGroups_ELT;
-import net.moeg.elt.loaders.Loader_Blocks;
-import net.moeg.elt.loaders.Loader_Items;
+import net.moeg.elt.handlers.Handler_Blocks;
+import net.moeg.elt.handlers.Handler_Items;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static net.moeg.elt.loaders.Loader_Blocks.EXAMPLE_BLOCK;
+import static net.moeg.elt.handlers.Handler_Blocks.EXAMPLE_BLOCK;
 import static net.devtech.arrp.api.RuntimeResourcePack.*;
 import static net.devtech.arrp.json.loot.JLootTable.*;
 
@@ -54,8 +54,8 @@ public class ELT_Main implements ModInitializer {
 		LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 
-		Loader_Items LOADER_ITEMS = new Loader_Items();
-		Loader_Blocks LOADER_BLOCKS = new Loader_Blocks();
+		Handler_Items Handler_ITEMS = new Handler_Items();
+		Handler_Blocks Handler_BLOCKS = new Handler_Blocks();
 
 		RESOURCE_PACK.addLootTable(id("minecraft:blocks/acacia_fence"),
 				loot("minecraft:block")
