@@ -25,12 +25,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.moeg.elt.blockentity.BlockEntityWoodCutter;
 import net.moeg.elt.blockentity.DemoBlockEntity;
 import net.moeg.elt.gui.WoodCutterScreenHandler;
 
 import javax.annotation.Nullable;
 
-public class WoodCutterBlock extends Block{
+public class WoodCutterBlock extends Block {
 
     protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
     private static final TranslatableText TITLE = new TranslatableText("container.woodcutter");
@@ -43,7 +44,7 @@ public class WoodCutterBlock extends Block{
     /** Action on clicking the block.  */
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.isClient) {
-            player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
+//            player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
             return ActionResult.SUCCESS;
         } else {
             player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
@@ -62,4 +63,9 @@ public class WoodCutterBlock extends Block{
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }
+//
+//    @Override
+//    public BlockEntity createBlockEntity(BlockView blockView) {
+//        return new BlockEntityWoodCutter();
+//    }
 }

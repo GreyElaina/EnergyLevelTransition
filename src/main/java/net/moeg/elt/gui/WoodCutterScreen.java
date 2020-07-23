@@ -35,7 +35,7 @@ public class WoodCutterScreen extends HandledScreen<WoodCutterScreenHandler> {
 
     public WoodCutterScreen(WoodCutterScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
-        handler.setContentsChangedListener(this::onInventoryChange);
+//        handler.setContentsChangedListener(this::onInventoryChange);
         --this.titleY;
     }
 
@@ -48,10 +48,11 @@ public class WoodCutterScreen extends HandledScreen<WoodCutterScreenHandler> {
         this.renderBackground(matrices);
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.client.getTextureManager().bindTexture(TEXTURE);
+        //this.x is the left-top x-coordinate of the GUI.
+        //this.y is the left-top y-coordinate of the GUI.
+        //it is calculated by (width of game screen - width of gui background)/2 (reasonable)
         int i = this.x;
         int j = this.y;
-//        System.out.println(i);
-//        System.out.println(j);
         // Draw the entire background from a 256x256 texture
         this.drawTexture(matrices, i, j, 0, 0, this.backgroundWidth, this.backgroundHeight);
         int k = (int)(41.0F * this.scrollAmount);
@@ -68,10 +69,16 @@ public class WoodCutterScreen extends HandledScreen<WoodCutterScreenHandler> {
         int i = (this.width - this.backgroundWidth) / 2;
         int j = (this.height - this.backgroundHeight) / 2;
 
+        float buttonWidth = 18;
+        float buttonHeight = 18;
+
+        //w 79 h 61
+        //each button: h=18 w=18
+
         for(int k = 0; k < 3; ++k) {
-            double d = mouseX - (double)(i + 60);
-            double e = mouseY - (double)(j + 14 + 19 * k);
-            if (d >= 0.0D && e >= 0.0D && d < 108.0D && e < 19.0D && ((WoodCutterScreenHandler)this.handler).onButtonClickCutLog(this.client.player, k)) {
+            double d = mouseX - (double)(i + 79 + 18 * k);
+            double e = mouseY - (double)(j + 61);
+            if (d >= 0.0D && e >= 0.0D && d < buttonWidth && e < buttonHeight && ((WoodCutterScreenHandler)this.handler).onButtonClickCutLog(this.client.player)) {
                 this.client.interactionManager.clickButton(((WoodCutterScreenHandler)this.handler).syncId, k);
                 return true;
             }
@@ -193,13 +200,13 @@ public class WoodCutterScreen extends HandledScreen<WoodCutterScreenHandler> {
 //        return (((WoodCutterScreenHandler)this.handler).getAvailableRecipeCount() + 4 - 1) / 4 - 3;
 //    }
 
-    private void onInventoryChange() {
-        this.canCraft = ((WoodCutterScreenHandler)this.handler).canCraft();
-        if (!this.canCraft) {
-            this.scrollAmount = 0.0F;
-            this.scrollOffset = 0;
-        }
-
-    }
+//    private void onInventoryChange() {
+//        this.canCraft = ((WoodCutterScreenHandler)this.handler).canCraft();
+//        if (!this.canCraft) {
+//            this.scrollAmount = 0.0F;
+//            this.scrollOffset = 0;
+//        }
+//
+//    }
 
 }
