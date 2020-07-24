@@ -2,27 +2,34 @@ package net.moeg.elt.blockentity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.LootableContainerBlockEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.screen.HopperScreenHandler;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.Direction;
 import net.moeg.elt.ELT_Main;
+import net.moeg.elt.gui.WoodCutterScreenHandler;
 
-public class BlockEntityWoodCutter extends BlockEntity implements ImplementedInventory, SidedInventory {
+public class BlockEntityWoodCutter extends LootableContainerBlockEntity {
 
-    private final DefaultedList<ItemStack> items = DefaultedList.ofSize(5, ItemStack.EMPTY);
-
-    @Override
-    public DefaultedList<ItemStack> getItems() {
-        return items;
-    }
+    private DefaultedList<ItemStack> items = DefaultedList.ofSize(5, ItemStack.EMPTY);
 
     // Serialize the BlockEntity
     public CompoundTag toTag(CompoundTag tag) {
         Inventories.toTag(tag,items);
         return super.toTag(tag);
+    }
+
+    @Override
+    protected Text getContainerName() {
+        return new TranslatableText("test");
     }
 
     // Deserialize the BlockEntity
@@ -32,31 +39,33 @@ public class BlockEntityWoodCutter extends BlockEntity implements ImplementedInv
 
     }
 
-    @Override
-    public int[] getAvailableSlots(Direction var1) {
-        // Just return an array of all slots
-        int[] result = new int[getItems().size()];
-        for (int i = 0; i < result.length; i++) {
-            result[i] = i;
-        }
 
-        return result;
-    }
-
-    /// Can insert itemstack from any dir except up
-    @Override
-    public boolean canInsert(int slot, ItemStack stack, Direction direction) {
-        return direction != Direction.UP;
-    }
-
-    // can extract from every dir
-    @Override
-    public boolean canExtract(int slot, ItemStack stack, Direction direction) {
-        return true;
-    }
 
     public BlockEntityWoodCutter() {
         super(ELT_Main.BlockEntityWoodCutter);
+
+    }
+    protected ScreenHandler createScreenHandler(int syncId, PlayerInventory playerInventory) {
+        return new WoodCutterScreenHandler(syncId, playerInventory, this);
     }
 
+    @Override
+    protected DefaultedList<ItemStack> getInvStackList() {
+        return items;
+    }
+
+    @Override
+    protected void setInvStackList(DefaultedList<ItemStack> list) {
+        this.items = list;
+    }
+
+    @Override
+    public void markDirty() {
+        super.markDirty();
+    }
+
+    @Override
+    public int size() {
+        return 5;
+    }
 }

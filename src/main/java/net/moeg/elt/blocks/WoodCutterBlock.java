@@ -2,11 +2,9 @@ package net.moeg.elt.blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockEntityProvider;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.ShapeContext;
+import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.screen.NamedScreenHandlerFactory;
@@ -31,10 +29,13 @@ import net.moeg.elt.gui.WoodCutterScreenHandler;
 
 import javax.annotation.Nullable;
 
-public class WoodCutterBlock extends Block {
+public class WoodCutterBlock extends BlockWithEntity {
 
     protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
     private static final TranslatableText TITLE = new TranslatableText("container.woodcutter");
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
 
 
     public WoodCutterBlock(FabricBlockSettings settings) {
@@ -44,28 +45,25 @@ public class WoodCutterBlock extends Block {
     /** Action on clicking the block.  */
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.isClient) {
-//            player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
             return ActionResult.SUCCESS;
         } else {
-            player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+            if (blockEntity instanceof BlockEntityWoodCutter) {
+                System.out.println(player);
+                player.openHandledScreen((BlockEntityWoodCutter)blockEntity);
+            }
             return ActionResult.CONSUME;
         }
     }
 
-    @Nullable
-    public NamedScreenHandlerFactory createScreenHandlerFactory(BlockState state, World world, BlockPos pos) {
-        return new SimpleNamedScreenHandlerFactory((i, playerInventory, playerEntity) -> {
-            return new WoodCutterScreenHandler(i, playerInventory, ScreenHandlerContext.create(world, pos));
-        }, TITLE);
-    }
 
     /** Register the voxel shape of the block. */
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }
-//
-//    @Override
-//    public BlockEntity createBlockEntity(BlockView blockView) {
-//        return new BlockEntityWoodCutter();
-//    }
+
+    @Override
+    public BlockEntity createBlockEntity(BlockView blockView) {
+        return new BlockEntityWoodCutter();
+    }
 }
