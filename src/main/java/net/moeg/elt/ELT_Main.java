@@ -4,16 +4,27 @@ import net.devtech.arrp.api.RRPCallback;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.json.lang.JLang;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
+import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.screen.ScreenHandlerContext;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
+import net.moeg.elt.blockentity.BlockEntityWoodCutter;
 import net.moeg.elt.blockentity.DemoBlockEntity;
+import net.moeg.elt.gui.WoodCutterScreen;
+import net.moeg.elt.gui.WoodCutterScreenHandler;
+import net.moeg.elt.handlers.ScreenHandlerTypeELT;
 import net.moeg.elt.items.ItemGroups_ELT;
 import net.moeg.elt.handlers.Handler_Blocks;
 import net.moeg.elt.handlers.Handler_Items;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static net.moeg.elt.handlers.Handler_Blocks.EXAMPLE_BLOCK;
+import static net.moeg.elt.handlers.Handler_Blocks.*;
 import static net.devtech.arrp.api.RuntimeResourcePack.*;
 import static net.devtech.arrp.json.loot.JLootTable.*;
 
@@ -30,7 +41,7 @@ public class ELT_Main implements ModInitializer {
 	public static final ItemGroups_ELT ITEM_GROUPS_ELT = new ItemGroups_ELT();
 
 	public static BlockEntityType<DemoBlockEntity> DEMO_BLOCK_ENTITY;
-	public static BlockEntityType<DemoBlockEntity> BlockEntityWoodCutter;
+	public static BlockEntityType<BlockEntityWoodCutter> BlockEntityWoodCutter;
 
 	@Override
 	public void onInitialize() {
@@ -57,6 +68,7 @@ public class ELT_Main implements ModInitializer {
 
 		Handler_Items Handler_ITEMS = new Handler_Items();
 		Handler_Blocks Handler_BLOCKS = new Handler_Blocks();
+		ScreenHandlerTypeELT SHTELT = new ScreenHandlerTypeELT();
 
 		RESOURCE_PACK.addLootTable(id("minecraft:blocks/acacia_fence"),
 				loot("minecraft:block")
@@ -71,9 +83,8 @@ public class ELT_Main implements ModInitializer {
 		RRPCallback.EVENT.register(a -> a.add(RESOURCE_PACK)); // register arrp resourcepack
 
 		DEMO_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, "elt:demo", BlockEntityType.Builder.create(DemoBlockEntity::new, EXAMPLE_BLOCK).build(null));
-		BlockEntityWoodCutter = Registry.register(Registry.BLOCK_ENTITY_TYPE, "elt:wood_cutter", BlockEntityType.Builder.create(DemoBlockEntity::new, EXAMPLE_BLOCK).build(null));
+		BlockEntityWoodCutter = Registry.register(Registry.BLOCK_ENTITY_TYPE, "elt:wood_cutter", BlockEntityType.Builder.create(BlockEntityWoodCutter::new, MANUAL_WOOD_CUTTER).build(null));
 
 		LOGGER.info("---Energy Level Transition Initialized!---");
-
 	}
 }

@@ -8,30 +8,45 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.StonecuttingRecipe;
-import net.minecraft.screen.Property;
-import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.*;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.world.World;
 import net.moeg.elt.ELT_Main;
 import net.moeg.elt.handlers.Handler_Items;
 import net.moeg.elt.handlers.ScreenHandlerTypeELT;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
-public class WoodCutterScreenHandler extends ScreenHandler {
+public class WoodCutterScreenHandler extends ScreenHandler implements NamedScreenHandlerFactory {
     final Slot inputSlot;
     final Slot toolSlot1;
     final Slot toolSlot2;
     final Slot outputSlot1;
     final Inventory inv;
+    private final ScreenHandlerContext context;
+//    private final ScreenHandlerFactory baseFactory;
 
-
-    public WoodCutterScreenHandler(int syncId, PlayerInventory playerInventory) {
-        this(syncId, playerInventory, new SimpleInventory(5));
+    @Override
+    public Text getDisplayName() {
+        return new TranslatableText("elt.wood_cutter.displaytext");
     }
 
-    public WoodCutterScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inv) {
+    @Nullable
+    @Override
+    public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+        return null;
+    }
+
+    public WoodCutterScreenHandler(int syncId, PlayerInventory playerInventory) {
+        this(syncId, playerInventory, new SimpleInventory(5), ScreenHandlerContext.EMPTY);
+    }
+
+    public WoodCutterScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inv, ScreenHandlerContext context) {
         super(ScreenHandlerTypeELT.WOOD_CUTTER, syncId);
+        this.context = context;
         this.inv = inv;
         inv.onOpen(playerInventory.player);
         this.inputSlot = this.addSlot(new Slot(inv, 0, 45, 16) {
@@ -73,26 +88,33 @@ public class WoodCutterScreenHandler extends ScreenHandler {
 
     public boolean onButtonClickCutLog(PlayerEntity player) {
 
+        System.out.println("Clicked");
         ItemStack result = new ItemStack(Items.OAK_LOG);
         if (inputSlot.getStack().isEmpty() || (toolSlot1.getStack().isEmpty() && toolSlot2.getStack().isEmpty())) {
             return false;
         } else {
             if (inputSlot.getStack().getItem() == Handler_Items.OAK_BRANCH) {
-                inputSlot.getStack().decrement(1);
-                if (inputSlot.getStack().isEmpty()) {
-                    inputSlot.setStack(ItemStack.EMPTY);
-                }
-                if (outputSlot1.getStack().getItem() == Items.AIR)
-                    this.outputSlot1.setStack(result.copy());
-                else {
-                    outputSlot1.getStack().increment(1);
-                }
-                outputSlot1.markDirty();
-                this.sendContentUpdates();
+                System.out.println("has branch");
+                this.context.run((world, blockPos) -> {
+                    System.out.println("Context run");
+
+                    inputSlot.getStack().decrement(1);
+                    if (inputSlot.getStack().isEmpty()) {
+                        inputSlot.setStack(ItemStack.EMPTY);
+                    }
+                    if (outputSlot1.getStack().getItem() == Items.AIR)
+                        this.outputSlot1.setStack(result.copy());
+                    else {
+                        outputSlot1.getStack().increment(1);
+                    }
+                    outputSlot1.markDirty();
+                    this.sendContentUpdates();
+                });
                 return true;
             }
             else
             {
+                System.out.println("no branch");
                 return false;
             }
         }
