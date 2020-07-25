@@ -11,10 +11,10 @@ import net.moeg.elt.gui.WoodCutterScreenHandler;
 
 public class ScreenHandlerTypeELT {
 
-     public static final ScreenHandlerType<WoodCutterScreenHandler> WOOD_CUTTER = ScreenHandlerRegistry.registerExtended(new Identifier("elt", "wood_cutter_screenhandler"), (syncId, inventory, buf) -> {
-          BlockPos pos = buf.readBlockPos();
-          World world = inventory.player.world;
-          return new WoodCutterScreenHandler(syncId, inventory, (Inventory) world.getBlockEntity(pos), ScreenHandlerContext.create(inventory.player.world, pos));
-     });
+    public static final ScreenHandlerType<WoodCutterScreenHandler> WOOD_CUTTER = ScreenHandlerRegistry.registerExtended(new Identifier("elt", "wood_cutter_screenhandler"), (syncId, inventory, buf) -> {
+        BlockPos pos = buf.readBlockPos();
+        World world = inventory.player.world;
+        return new WoodCutterScreenHandler(syncId, inventory, (Inventory) world.getBlockEntity(pos), ScreenHandlerContext.create(inventory.player.world, pos));
+    });
 
 }

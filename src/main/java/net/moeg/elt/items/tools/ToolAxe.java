@@ -1,6 +1,5 @@
 package net.moeg.elt.items.tools;
 
-import net.minecraft.item.AxeItem;
 import net.minecraft.item.ToolMaterial;
 import net.moeg.elt.items.ItemGroups_ELT;
 

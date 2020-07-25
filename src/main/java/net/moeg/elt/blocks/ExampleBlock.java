@@ -2,7 +2,10 @@ package net.moeg.elt.blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockEntityProvider;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.ShapeContext;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.Inventory;
@@ -20,9 +23,8 @@ import net.moeg.elt.blockentity.DemoBlockEntity;
 
 public class ExampleBlock extends Block implements BlockEntityProvider {
 
-    protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
-
     public static final BooleanProperty HARDENED = BooleanProperty.of("hardened");
+    protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 12.0D, 16.0D);
 
 
     public ExampleBlock(FabricBlockSettings settings) {
@@ -30,7 +32,9 @@ public class ExampleBlock extends Block implements BlockEntityProvider {
         setDefaultState(getStateManager().getDefaultState().with(HARDENED, false));  //(To set multiple properties, chain with() calls)
     }
 
-    /** Action on clicking the block.  */
+    /**
+     * Action on clicking the block.
+     */
     @Override
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
@@ -49,12 +53,10 @@ public class ExampleBlock extends Block implements BlockEntityProvider {
                 blockEntity.setStack(0, player.getStackInHand(hand).copy());
                 // Remove the stack from the player's hand
                 player.getStackInHand(hand).setCount(0);
-            }
-            else if (blockEntity.getStack(1).isEmpty()) {
+            } else if (blockEntity.getStack(1).isEmpty()) {
                 blockEntity.setStack(1, player.getStackInHand(hand).copy());
                 player.getStackInHand(hand).setCount(0);
-            }
-            else {
+            } else {
                 // If the inventory is full we'll print it's contents
                 player.sendMessage(new LiteralText("The first slot holds " + blockEntity.getStack(0) + " and the second slot holds " + blockEntity.getStack(1)), false);
             }
@@ -80,12 +82,16 @@ public class ExampleBlock extends Block implements BlockEntityProvider {
         return ActionResult.SUCCESS;
     }
 
-    /** Register the voxel shape of the block. */
+    /**
+     * Register the voxel shape of the block.
+     */
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }
 
-    /** Append a block state property. */
+    /**
+     * Append a block state property.
+     */
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> stateManager) {
         stateManager.add(HARDENED);

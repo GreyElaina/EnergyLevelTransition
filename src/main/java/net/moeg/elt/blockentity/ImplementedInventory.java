@@ -9,25 +9,20 @@ import net.minecraft.util.collection.DefaultedList;
 
 /**
  * A simple {@code Inventory} implementation with only default methods + an item list getter.
- *
+ * <p>
  * Originally by Juuz
  */
 
 
 public interface ImplementedInventory extends Inventory {
     /**
-     * Gets the item list of this inventory.
-     * Must return the same instance every time it's called.
-     */
-    DefaultedList<ItemStack> getItems();
-
-    // Creation
-    /**
      * Creates an inventory from the item list.
      */
     static ImplementedInventory of(DefaultedList<ItemStack> items) {
         return () -> items;
     }
+
+    // Creation
 
     /**
      * Creates a new inventory with the size.
@@ -36,7 +31,14 @@ public interface ImplementedInventory extends Inventory {
         return of(DefaultedList.ofSize(size, ItemStack.EMPTY));
     }
 
+    /**
+     * Gets the item list of this inventory.
+     * Must return the same instance every time it's called.
+     */
+    DefaultedList<ItemStack> getItems();
+
     // Inventory
+
     /**
      * Returns the inventory size.
      */

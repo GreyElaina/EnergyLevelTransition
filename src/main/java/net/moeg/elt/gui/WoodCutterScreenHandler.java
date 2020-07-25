@@ -5,7 +5,6 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
@@ -13,7 +12,6 @@ import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.moeg.elt.blockentity.WoodCutterBlockEntity;
-import net.moeg.elt.handlers.Handler_Items;
 import net.moeg.elt.handlers.ScreenHandlerTypeELT;
 import net.moeg.elt.recipe.WoodCutterRecipe;
 
@@ -29,17 +27,6 @@ public class WoodCutterScreenHandler extends ScreenHandler implements NamedScree
     final Inventory inv;
     private final ScreenHandlerContext context;
 //    private final ScreenHandlerFactory baseFactory;
-
-    @Override
-    public Text getDisplayName() {
-        return new TranslatableText("elt.wood_cutter.displaytext");
-    }
-
-    @Nullable
-    @Override
-    public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
-        return null;
-    }
 
     public WoodCutterScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, new SimpleInventory(5), ScreenHandlerContext.EMPTY);
@@ -72,7 +59,7 @@ public class WoodCutterScreenHandler extends ScreenHandler implements NamedScree
                 return false;
             }
         });
-        this.outputSlot2 = this.addSlot(new Slot(inv, 4, 98, 16+18) {
+        this.outputSlot2 = this.addSlot(new Slot(inv, 4, 98, 16 + 18) {
             public boolean canInsert(ItemStack stack) {
                 return false;
             }
@@ -89,6 +76,17 @@ public class WoodCutterScreenHandler extends ScreenHandler implements NamedScree
             this.addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
         }
 
+    }
+
+    @Override
+    public Text getDisplayName() {
+        return new TranslatableText("elt.wood_cutter.displaytext");
+    }
+
+    @Nullable
+    @Override
+    public ScreenHandler createMenu(int syncId, PlayerInventory inv, PlayerEntity player) {
+        return null;
     }
 
     @Override

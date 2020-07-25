@@ -19,16 +19,18 @@ public class WoodCutterBlock extends BlockWithEntity {
 
     protected static final VoxelShape SHAPE = Block.createCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
     private static final TranslatableText TITLE = new TranslatableText("container.woodcutter");
-    public BlockRenderType getRenderType(BlockState state) {
-        return BlockRenderType.MODEL;
-    }
-
 
     public WoodCutterBlock(FabricBlockSettings settings) {
         super(settings.hardness(10.0f).breakByTool(FabricToolTags.PICKAXES, 2).requiresTool());
     }
 
-    /** Action on clicking the block.  */
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
+    }
+
+    /**
+     * Action on clicking the block.
+     */
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (world.isClient) {
             return ActionResult.SUCCESS;
@@ -36,14 +38,16 @@ public class WoodCutterBlock extends BlockWithEntity {
             BlockEntity blockEntity = world.getBlockEntity(pos);
             if (blockEntity instanceof WoodCutterBlockEntity) {
                 System.out.println(player);
-                player.openHandledScreen((WoodCutterBlockEntity)blockEntity);
+                player.openHandledScreen((WoodCutterBlockEntity) blockEntity);
             }
             return ActionResult.CONSUME;
         }
     }
 
 
-    /** Register the voxel shape of the block. */
+    /**
+     * Register the voxel shape of the block.
+     */
     public VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
         return SHAPE;
     }

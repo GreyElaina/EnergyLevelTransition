@@ -1,7 +1,5 @@
 package net.moeg.elt.items.tools;
 
-import net.minecraft.item.AxeItem;
-import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterial;
 import net.moeg.elt.items.ItemGroups_ELT;

@@ -10,7 +10,7 @@ import net.minecraft.world.BlockRenderView;
 
 import javax.annotation.Nullable;
 
-import static net.moeg.elt.api.data.CS.*;
+import static net.moeg.elt.api.data.CS.WHITE;
 
 @Environment(EnvType.CLIENT)
 public class LeavesColorProvider implements BlockColorProvider {
@@ -28,9 +28,7 @@ public class LeavesColorProvider implements BlockColorProvider {
             biomecolor = BiomeColors.getFoliageColor(world, pos);
             return biomecolor;
 
-        }
-
-        else return color;
+        } else return color;
 
 //        if (pos != null && pos.getY() == 60) {
 //            color = RED;

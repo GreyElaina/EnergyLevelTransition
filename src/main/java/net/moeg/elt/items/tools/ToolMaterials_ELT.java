@@ -7,7 +7,9 @@ import net.minecraft.util.Lazy;
 
 import java.util.function.Supplier;
 
-/** 关于工具材料的属性在此定义。*/
+/**
+ * 关于工具材料的属性在此定义。
+ */
 public enum ToolMaterials_ELT implements ToolMaterial {
 
     CHIPPED_FLINT(1, 16, 1.5F, 1.0F, 4, () -> Ingredient.ofItems(Items.FLINT)),

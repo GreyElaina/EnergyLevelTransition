@@ -17,6 +17,11 @@ import net.moeg.elt.blockentity.WoodCutterBlockEntity;
 import net.moeg.elt.util.ItemStackUtil;
 
 public class WoodCutterRecipe implements Recipe<WoodCutterBlockEntity> {
+    public static RecipeType<WoodCutterRecipe> WOOD_CUTTER = Registry.register(Registry.RECIPE_TYPE, new Identifier("elt:woofcutter"), new RecipeType<WoodCutterRecipe>() {
+        public String toString() {
+            return "woofcutter";
+        }
+    });
     private final ItemStack output;
     private final ItemStack output2;
     private final Identifier id;
@@ -69,28 +74,28 @@ public class WoodCutterRecipe implements Recipe<WoodCutterBlockEntity> {
         } else {
             inv0.setCount(inv0.getCount() - 1);
         }
-        if (tools.size()==2){
+        if (tools.size() == 2) {
             damage(inv1);
             damage(inv2);
-        }
-        else if (tools.size()==1){
-            if (!inv1.isEmpty()&&tools.get(0).test(inv1)){
+        } else if (tools.size() == 1) {
+            if (!inv1.isEmpty() && tools.get(0).test(inv1)) {
                 damage(inv1);
-            }
-            else if (!inv2.isEmpty()&&tools.get(0).test(inv2)){
+            } else if (!inv2.isEmpty() && tools.get(0).test(inv2)) {
                 damage(inv2);
             }
         }
         return ItemStack.EMPTY;
     }
-    private void damage(ItemStack i){
-        if (!i.isEmpty()){
-            i.setDamage(i.getDamage()+1);
-            if (i.getDamage()>=i.getMaxDamage()){
-                i.setCount(i.getCount()-1);
+
+    private void damage(ItemStack i) {
+        if (!i.isEmpty()) {
+            i.setDamage(i.getDamage() + 1);
+            if (i.getDamage() >= i.getMaxDamage()) {
+                i.setCount(i.getCount() - 1);
             }
         }
     }
+
     @Override
     public boolean fits(int width, int height) {
         return true;
@@ -106,12 +111,6 @@ public class WoodCutterRecipe implements Recipe<WoodCutterBlockEntity> {
         return id;
     }
 
-    public static RecipeType<WoodCutterRecipe> WOOD_CUTTER = Registry.register(Registry.RECIPE_TYPE, new Identifier("elt:woofcutter"), new RecipeType<WoodCutterRecipe>() {
-        public String toString() {
-            return "woofcutter";
-        }
-    });
-
     @Override
     public RecipeSerializer<?> getSerializer() {
         return ELT_Main.WOOD_CUTTER_RECIPE;
@@ -124,15 +123,6 @@ public class WoodCutterRecipe implements Recipe<WoodCutterBlockEntity> {
 
 
     public static class Serializer implements RecipeSerializer<WoodCutterRecipe> {
-        public WoodCutterRecipe read(Identifier identifier, JsonObject jsonObject) {
-            return new WoodCutterRecipe(identifier,
-                    ItemStackUtil.loadStackFromJson(jsonObject.get("output")),
-                    ItemStackUtil.loadStackFromJson(jsonObject.get("output2")),
-                    Ingredient.fromJson(jsonObject.get("input")),
-                    getIngredients(jsonObject.get("tools").getAsJsonArray())
-            );
-        }
-
         private static DefaultedList<Ingredient> getIngredients(JsonArray json) {
             DefaultedList<Ingredient> defaultedList = DefaultedList.of();
 
@@ -144,6 +134,15 @@ public class WoodCutterRecipe implements Recipe<WoodCutterBlockEntity> {
             }
 
             return defaultedList;
+        }
+
+        public WoodCutterRecipe read(Identifier identifier, JsonObject jsonObject) {
+            return new WoodCutterRecipe(identifier,
+                    ItemStackUtil.loadStackFromJson(jsonObject.get("output")),
+                    ItemStackUtil.loadStackFromJson(jsonObject.get("output2")),
+                    Ingredient.fromJson(jsonObject.get("input")),
+                    getIngredients(jsonObject.get("tools").getAsJsonArray())
+            );
         }
 
         public WoodCutterRecipe read(Identifier identifier, PacketByteBuf packetByteBuf) {

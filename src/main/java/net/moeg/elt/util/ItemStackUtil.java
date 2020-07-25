@@ -2,13 +2,11 @@ package net.moeg.elt.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Dynamic;
 import com.mojang.serialization.JsonOps;
-
 import net.minecraft.datafixer.NbtOps;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -21,7 +19,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.registry.Registry;
 import net.moeg.elt.mixin.MixinIngredient;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,33 +132,6 @@ public class ItemStackUtil {
         return stack.isEmpty() ? StackWrapper.EMPTY_WRAPPER : new StackWrapper(stack);
     }
 
-    public static class StackWrapper {
-
-        public static final StackWrapper EMPTY_WRAPPER = new StackWrapper(ItemStack.EMPTY);
-
-        public final ItemStack stack;
-
-        public StackWrapper(ItemStack stack) {
-            this.stack = stack;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            return obj == this || (obj instanceof StackWrapper && ItemStack.areItemsEqual(stack, ((StackWrapper) obj).stack));
-        }
-
-        @Override
-        public int hashCode() {
-            return stack.getItem().hashCode();
-        }
-
-        @Override
-        public String toString() {
-            return "Wrapper[" + stack.toString() + "]";
-        }
-
-    }
-
     private static String[] splitStacksFromSerializedIngredient(String ingredientSerialized) {
         final List<String> result = new ArrayList<>();
 
@@ -199,12 +169,14 @@ public class ItemStackUtil {
 
         return result.toArray(new String[0]);
     }
+
     public static ItemStack loadStackFromJson(JsonElement json) {
         if (json instanceof JsonObject)
             return loadStackFromJsonObject(json.getAsJsonObject());
         else
             return ItemStack.EMPTY;
     }
+
     public static ItemStack loadStackFromJsonObject(JsonObject json) {
         // Adapted from net.minecraftforge.common.crafting.CraftingHelper::getItemStack
         String itemName = json.get("item").getAsString();
@@ -230,5 +202,32 @@ public class ItemStackUtil {
         }
 
         return stack;
+    }
+
+    public static class StackWrapper {
+
+        public static final StackWrapper EMPTY_WRAPPER = new StackWrapper(ItemStack.EMPTY);
+
+        public final ItemStack stack;
+
+        public StackWrapper(ItemStack stack) {
+            this.stack = stack;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            return obj == this || (obj instanceof StackWrapper && ItemStack.areItemsEqual(stack, ((StackWrapper) obj).stack));
+        }
+
+        @Override
+        public int hashCode() {
+            return stack.getItem().hashCode();
+        }
+
+        @Override
+        public String toString() {
+            return "Wrapper[" + stack.toString() + "]";
+        }
+
     }
 }

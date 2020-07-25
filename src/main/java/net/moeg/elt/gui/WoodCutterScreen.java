@@ -1,32 +1,13 @@
 package net.moeg.elt.gui;
 
-import com.google.common.collect.Maps;
 import com.mojang.blaze3d.systems.RenderSystem;
-import java.util.List;
-import java.util.Map;
-
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
-import net.minecraft.client.gui.screen.ingame.HandledScreens;
-import net.minecraft.client.gui.screen.ingame.ScreenHandlerProvider;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.gui.widget.TexturedButtonWidget;
-import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.recipe.StonecuttingRecipe;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.screen.ScreenHandlerType;
-import net.minecraft.screen.StonecutterScreenHandler;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.registry.Registry;
 
 @Environment(EnvType.CLIENT)
 public class WoodCutterScreen extends HandledScreen<WoodCutterScreenHandler> {
@@ -52,7 +33,7 @@ public class WoodCutterScreen extends HandledScreen<WoodCutterScreenHandler> {
         int i = this.x;
         int j = this.y;
         this.drawTexture(matrices, i, j, 0, 0, this.backgroundWidth, this.backgroundHeight);
-        int k = (int)(41.0F * this.scrollAmount);
+        int k = (int) (41.0F * this.scrollAmount);
         this.drawTexture(matrices, i + 119, j + 15 + k, 176 + 12, 0, 12, 15);
     }
 
@@ -63,10 +44,10 @@ public class WoodCutterScreen extends HandledScreen<WoodCutterScreenHandler> {
         float buttonWidth = 18;
         float buttonHeight = 18;
 
-        for(int k = 0; k < 3; ++k) {
-            double d = mouseX - (double)(i + 79 + 18 * k);
-            double e = mouseY - (double)(j + 61);
-            if (d >= 0.0D && e >= 0.0D && d < buttonWidth && e < buttonHeight ) {
+        for (int k = 0; k < 3; ++k) {
+            double d = mouseX - (double) (i + 79 + 18 * k);
+            double e = mouseY - (double) (j + 61);
+            if (d >= 0.0D && e >= 0.0D && d < buttonWidth && e < buttonHeight) {
                 assert this.client != null;
                 assert this.client.interactionManager != null;
                 this.client.interactionManager.clickButton((this.handler).syncId, k);

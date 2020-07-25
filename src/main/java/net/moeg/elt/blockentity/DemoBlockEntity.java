@@ -12,10 +12,13 @@ import net.moeg.elt.ELT_Main;
 
 public class DemoBlockEntity extends BlockEntity implements ImplementedInventory, SidedInventory {
 
+    private final DefaultedList<ItemStack> items = DefaultedList.ofSize(2, ItemStack.EMPTY);
     // Store the current value of the number
     private int number = 7;
 
-    private final DefaultedList<ItemStack> items = DefaultedList.ofSize(2, ItemStack.EMPTY);
+    public DemoBlockEntity() {
+        super(ELT_Main.DEMO_BLOCK_ENTITY);
+    }
 
     @Override
     public DefaultedList<ItemStack> getItems() {
@@ -26,7 +29,7 @@ public class DemoBlockEntity extends BlockEntity implements ImplementedInventory
     public CompoundTag toTag(CompoundTag tag) {
         // Save the current value of the number to the tag
         tag.putInt("number", number);
-        Inventories.toTag(tag,items);
+        Inventories.toTag(tag, items);
         return super.toTag(tag);
     }
 
@@ -34,10 +37,9 @@ public class DemoBlockEntity extends BlockEntity implements ImplementedInventory
     public void fromTag(BlockState state, CompoundTag tag) {
         super.fromTag(state, tag);
         number = tag.getInt("number");
-        Inventories.fromTag(tag,items);
+        Inventories.fromTag(tag, items);
 
     }
-
 
     @Override
     public int[] getAvailableSlots(Direction var1) {
@@ -60,10 +62,6 @@ public class DemoBlockEntity extends BlockEntity implements ImplementedInventory
     @Override
     public boolean canExtract(int slot, ItemStack stack, Direction direction) {
         return true;
-    }
-
-    public DemoBlockEntity() {
-        super(ELT_Main.DEMO_BLOCK_ENTITY);
     }
 
 }

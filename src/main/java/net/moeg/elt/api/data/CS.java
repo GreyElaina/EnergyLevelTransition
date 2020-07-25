@@ -1,25 +1,17 @@
 package net.moeg.elt.api.data;
 
 
-import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.Biomes;
-
-import java.util.Set;
-
 public class CS {
 
-    /** Because "true" and "false" are too long. Some Programmers might wanna kill me for that, but this looks much better than true and false, and also it is better to have something that is not 4 and 5 Characters long, because of symmetry */
+    /**
+     * Because "true" and "false" are too long. Some Programmers might wanna kill me for that, but this looks much better than true and false, and also it is better to have something that is not 4 and 5 Characters long, because of symmetry
+     */
     public static final boolean T = true, F = false;
 
-    /** A few Default Values for Light Opacity. */
+    /**
+     * A few Default Values for Light Opacity.
+     */
     public static final int LIGHT_OPACITY_NONE = 0, LIGHT_OPACITY_LEAVES = 1, LIGHT_OPACITY_WATER = 3, LIGHT_OPACITY_MAX = 255;
-
-    /** Colors in hex */
-    public static int
-    RED = 0xf91313,
-    BLUE = 0x3495eb,
-    WHITE = 0xffffff;
-
     public static final int[] RAINBOW_ARRAY = {
             0xff0000,
             0xff4000,
@@ -46,5 +38,12 @@ public class CS {
             0xff0080,
             0xff0040,
     };
+    /**
+     * Colors in hex
+     */
+    public static int
+            RED = 0xf91313,
+            BLUE = 0x3495eb,
+            WHITE = 0xffffff;
 
 }
