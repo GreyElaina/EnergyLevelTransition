@@ -5,6 +5,8 @@ import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.stat.Stats;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -14,6 +16,9 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.moeg.elt.blockentity.WoodCutterBlockEntity;
+import net.moeg.elt.recipe.WoodCutterRecipe;
+
+import javax.annotation.Nullable;
 
 public class WoodCutterBlock extends BlockWithEntity {
 
@@ -55,5 +60,15 @@ public class WoodCutterBlock extends BlockWithEntity {
     @Override
     public BlockEntity createBlockEntity(BlockView blockView) {
         return new WoodCutterBlockEntity();
+    }
+
+    @Override
+    public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
+        super.afterBreak(world, player, pos, state, blockEntity, stack);
+        if (blockEntity instanceof WoodCutterBlockEntity){
+            ((WoodCutterBlockEntity) blockEntity).getInvStackList().forEach(i->{
+                Block.dropStack(world,pos,i);
+            });
+        }
     }
 }

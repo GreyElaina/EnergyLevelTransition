@@ -96,28 +96,6 @@ public class WoodCutterScreenHandler extends ScreenHandler implements NamedScree
             i.craft((WoodCutterBlockEntity) inv);
         });
         return true;
-//        ItemStack result = new ItemStack(Items.OAK_LOG);
-//        if (inputSlot.getStack().isEmpty() || (toolSlot1.getStack().isEmpty() && toolSlot2.getStack().isEmpty())) {
-//            return false;
-//        } else {
-//            if (inputSlot.getStack().getItem() == Handler_Items.OAK_BRANCH) {
-//
-//                inputSlot.getStack().decrement(1);
-//                if (inputSlot.getStack().isEmpty()) {
-//                    inputSlot.setStack(ItemStack.EMPTY);
-//                }
-//                if (outputSlot1.getStack().getItem() == Items.AIR)
-//                    this.outputSlot1.setStack(result.copy());
-//                else {
-//                    outputSlot1.getStack().increment(1);
-//                }
-//                outputSlot1.markDirty();
-//                this.sendContentUpdates();
-//                return true;
-//            } else {
-//                return false;
-//            }
-//        }
     }
 
     @Override
@@ -126,7 +104,17 @@ public class WoodCutterScreenHandler extends ScreenHandler implements NamedScree
     }
 
     public ItemStack transferSlot(PlayerEntity player, int index) {
+        Slot slot = (Slot)this.slots.get(index);
         ItemStack itemStack = ItemStack.EMPTY;
+        if (slot != null && slot.hasStack()) {
+             itemStack = slot.getStack();
+            if(index>=5&&!this.insertItem(itemStack,0,3,false)){
+                return ItemStack.EMPTY;
+            }
+            else if(index<5&&!this.insertItem(itemStack,5,5+36,false)){
+                return ItemStack.EMPTY;
+            }
+        }
         return itemStack;
     }
 }

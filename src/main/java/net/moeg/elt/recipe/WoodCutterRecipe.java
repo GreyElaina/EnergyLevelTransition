@@ -121,7 +121,6 @@ public class WoodCutterRecipe implements Recipe<WoodCutterBlockEntity> {
         return WOOD_CUTTER;
     }
 
-
     public static class Serializer implements RecipeSerializer<WoodCutterRecipe> {
         private static DefaultedList<Ingredient> getIngredients(JsonArray json) {
             DefaultedList<Ingredient> defaultedList = DefaultedList.of();
@@ -146,10 +145,24 @@ public class WoodCutterRecipe implements Recipe<WoodCutterBlockEntity> {
         }
 
         public WoodCutterRecipe read(Identifier identifier, PacketByteBuf packetByteBuf) {
-            return null;
+            ItemStack output = packetByteBuf.readItemStack();
+            ItemStack output2 = packetByteBuf.readItemStack();
+            Ingredient input = Ingredient.fromPacket(packetByteBuf);
+            DefaultedList<Ingredient> tools = DefaultedList.of();
+            for (int i =0;i<packetByteBuf.readShort();i++){
+                tools.add(Ingredient.fromPacket(packetByteBuf));
+            }
+            return new WoodCutterRecipe(identifier,output,output2,input,tools);
         }
 
-        public void write(PacketByteBuf packetByteBuf, WoodCutterRecipe shapelessRecipe) {
+        public void write(PacketByteBuf packetByteBuf, WoodCutterRecipe recipe) {
+            packetByteBuf.writeItemStack(recipe.output);
+            packetByteBuf.writeItemStack(recipe.output2);
+            recipe.input.write(packetByteBuf);
+            packetByteBuf.writeShort(recipe.tools.size());
+            for (Ingredient i : recipe.tools){
+                i.write(packetByteBuf);
+            }
         }
     }
 }

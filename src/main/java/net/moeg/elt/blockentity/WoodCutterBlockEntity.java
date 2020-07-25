@@ -54,7 +54,7 @@ public class WoodCutterBlockEntity extends LootableContainerBlockEntity implemen
     }
 
     @Override
-    protected DefaultedList<ItemStack> getInvStackList() {
+    public DefaultedList<ItemStack> getInvStackList() {
         return items;
     }
 
