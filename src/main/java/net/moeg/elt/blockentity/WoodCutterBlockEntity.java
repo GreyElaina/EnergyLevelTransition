@@ -21,7 +21,7 @@ import net.minecraft.util.math.Direction;
 import net.moeg.elt.ELT_Main;
 import net.moeg.elt.gui.WoodCutterScreenHandler;
 
-public class BlockEntityWoodCutter extends LootableContainerBlockEntity implements ExtendedScreenHandlerFactory {
+public class WoodCutterBlockEntity extends LootableContainerBlockEntity implements ExtendedScreenHandlerFactory {
 
     private DefaultedList<ItemStack> items = DefaultedList.ofSize(5, ItemStack.EMPTY);
 
@@ -50,7 +50,7 @@ public class BlockEntityWoodCutter extends LootableContainerBlockEntity implemen
 
 
 
-    public BlockEntityWoodCutter() {
+    public WoodCutterBlockEntity() {
         super(ELT_Main.BlockEntityWoodCutter);
 
     }

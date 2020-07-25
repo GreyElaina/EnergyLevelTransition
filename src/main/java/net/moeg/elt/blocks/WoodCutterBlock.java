@@ -4,17 +4,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.inventory.Inventory;
-import net.minecraft.screen.NamedScreenHandlerFactory;
-import net.minecraft.screen.ScreenHandlerContext;
-import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
-import net.minecraft.screen.StonecutterScreenHandler;
-import net.minecraft.stat.Stats;
-import net.minecraft.state.StateManager;
-import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -23,11 +13,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import net.moeg.elt.blockentity.BlockEntityWoodCutter;
-import net.moeg.elt.blockentity.DemoBlockEntity;
-import net.moeg.elt.gui.WoodCutterScreenHandler;
-
-import javax.annotation.Nullable;
+import net.moeg.elt.blockentity.WoodCutterBlockEntity;
 
 public class WoodCutterBlock extends BlockWithEntity {
 
@@ -48,9 +34,9 @@ public class WoodCutterBlock extends BlockWithEntity {
             return ActionResult.SUCCESS;
         } else {
             BlockEntity blockEntity = world.getBlockEntity(pos);
-            if (blockEntity instanceof BlockEntityWoodCutter) {
+            if (blockEntity instanceof WoodCutterBlockEntity) {
                 System.out.println(player);
-                player.openHandledScreen((BlockEntityWoodCutter)blockEntity);
+                player.openHandledScreen((WoodCutterBlockEntity)blockEntity);
             }
             return ActionResult.CONSUME;
         }
@@ -64,6 +50,6 @@ public class WoodCutterBlock extends BlockWithEntity {
 
     @Override
     public BlockEntity createBlockEntity(BlockView blockView) {
-        return new BlockEntityWoodCutter();
+        return new WoodCutterBlockEntity();
     }
 }
