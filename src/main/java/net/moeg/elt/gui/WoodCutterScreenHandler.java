@@ -49,6 +49,8 @@ public class WoodCutterScreenHandler extends ScreenHandler implements NamedScree
         this.context = context;
         this.inv = inv;
         inv.onOpen(playerInventory.player);
+        System.out.println(playerInventory.player.currentScreenHandler);
+        playerInventory.player.currentScreenHandler = this;
         this.inputSlot = this.addSlot(new Slot(inv, 0, 45, 16) {
             public boolean canInsert(ItemStack stack) {
                 return true;
@@ -85,8 +87,8 @@ public class WoodCutterScreenHandler extends ScreenHandler implements NamedScree
 
     }
 
-
-    public boolean onButtonClickCutLog(PlayerEntity player) {
+    @Override
+    public boolean onButtonClick(PlayerEntity player, int id) {
 
         System.out.println("Clicked");
         ItemStack result = new ItemStack(Items.OAK_LOG);
