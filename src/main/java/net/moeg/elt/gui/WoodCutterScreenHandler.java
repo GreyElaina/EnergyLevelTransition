@@ -7,6 +7,8 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.recipe.CraftingRecipe;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.StonecuttingRecipe;
 import net.minecraft.screen.*;
 import net.minecraft.screen.slot.Slot;
@@ -14,11 +16,14 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.world.World;
 import net.moeg.elt.ELT_Main;
+import net.moeg.elt.blockentity.WoodCutterBlockEntity;
 import net.moeg.elt.handlers.Handler_Items;
 import net.moeg.elt.handlers.ScreenHandlerTypeELT;
+import net.moeg.elt.recipe.WoodCutterRecipe;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 
 public class WoodCutterScreenHandler extends ScreenHandler implements NamedScreenHandlerFactory {
     final Slot inputSlot;
@@ -89,37 +94,41 @@ public class WoodCutterScreenHandler extends ScreenHandler implements NamedScree
 
     @Override
     public boolean onButtonClick(PlayerEntity player, int id) {
-
+        Optional<WoodCutterRecipe> optional = player.world.getServer().getRecipeManager().getFirstMatch(WoodCutterRecipe.WOOD_CUTTER, (WoodCutterBlockEntity)inv, player.world);
+        optional.ifPresent(i->{
+            i.craft((WoodCutterBlockEntity)inv);
+        });
         System.out.println("Clicked");
-        ItemStack result = new ItemStack(Items.OAK_LOG);
-        if (inputSlot.getStack().isEmpty() || (toolSlot1.getStack().isEmpty() && toolSlot2.getStack().isEmpty())) {
-            return false;
-        } else {
-            if (inputSlot.getStack().getItem() == Handler_Items.OAK_BRANCH) {
-                System.out.println("has branch");
-                this.context.run((world, blockPos) -> {
-                    System.out.println("Context run");
-
-                    inputSlot.getStack().decrement(1);
-                    if (inputSlot.getStack().isEmpty()) {
-                        inputSlot.setStack(ItemStack.EMPTY);
-                    }
-                    if (outputSlot1.getStack().getItem() == Items.AIR)
-                        this.outputSlot1.setStack(result.copy());
-                    else {
-                        outputSlot1.getStack().increment(1);
-                    }
-                    outputSlot1.markDirty();
-                    this.sendContentUpdates();
-                });
-                return true;
-            }
-            else
-            {
-                System.out.println("no branch");
-                return false;
-            }
-        }
+//        ItemStack result = new ItemStack(Items.OAK_LOG);
+//        if (inputSlot.getStack().isEmpty() || (toolSlot1.getStack().isEmpty() && toolSlot2.getStack().isEmpty())) {
+//            return false;
+//        } else {
+//            if (inputSlot.getStack().getItem() == Handler_Items.OAK_BRANCH) {
+//                System.out.println("has branch");
+//                this.context.run((world, blockPos) -> {
+//                    System.out.println("Context run");
+//
+//                    inputSlot.getStack().decrement(1);
+//                    if (inputSlot.getStack().isEmpty()) {
+//                        inputSlot.setStack(ItemStack.EMPTY);
+//                    }
+//                    if (outputSlot1.getStack().getItem() == Items.AIR)
+//                        this.outputSlot1.setStack(result.copy());
+//                    else {
+//                        outputSlot1.getStack().increment(1);
+//                    }
+//                    outputSlot1.markDirty();
+//                    this.sendContentUpdates();
+//                });
+//                return true;
+//            }
+//            else
+//            {
+//                System.out.println("no branch");
+//                return false;
+//            }
+//        }
+        return true;
     }
 
     @Override

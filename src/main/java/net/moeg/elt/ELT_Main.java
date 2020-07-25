@@ -5,6 +5,8 @@ import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.json.lang.JLang;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.block.entity.BlockEntityType;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.ShapelessRecipe;
 import net.minecraft.util.registry.Registry;
 import net.moeg.elt.blockentity.WoodCutterBlockEntity;
 import net.moeg.elt.blockentity.DemoBlockEntity;
@@ -12,6 +14,7 @@ import net.moeg.elt.handlers.ScreenHandlerTypeELT;
 import net.moeg.elt.items.ItemGroups_ELT;
 import net.moeg.elt.handlers.Handler_Blocks;
 import net.moeg.elt.handlers.Handler_Items;
+import net.moeg.elt.recipe.WoodCutterRecipe;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,6 +27,7 @@ public class ELT_Main implements ModInitializer {
 	public static final String MOD_ID = "elt";
 	public static final RuntimeResourcePack RESOURCE_PACK = RuntimeResourcePack.create("elt:main");
 	public static final Logger LOGGER = LogManager.getFormatterLogger("Energy Level Transition");
+	public static RecipeSerializer<WoodCutterRecipe> WOOD_CUTTER_RECIPE = Registry.register(Registry.RECIPE_SERIALIZER, "elt:woodcutter", new WoodCutterRecipe.Serializer());
 
 	public static JLang EN_US = JLang.lang();
 	public static JLang ZH_CN = JLang.lang();
@@ -75,7 +79,6 @@ public class ELT_Main implements ModInitializer {
 
 		DEMO_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, "elt:demo", BlockEntityType.Builder.create(DemoBlockEntity::new, EXAMPLE_BLOCK).build(null));
 		BlockEntityWoodCutter = Registry.register(Registry.BLOCK_ENTITY_TYPE, "elt:wood_cutter", BlockEntityType.Builder.create(WoodCutterBlockEntity::new, MANUAL_WOOD_CUTTER).build(null));
-
 		LOGGER.info("---Energy Level Transition Initialized!---");
 	}
 }

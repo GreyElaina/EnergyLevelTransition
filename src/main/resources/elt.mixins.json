@@ -4,6 +4,7 @@
   "package": "net.moeg.elt.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "MixinIngredient"
   ],
   "client": [
     "ELT_Mixin"
