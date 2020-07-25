@@ -199,8 +199,13 @@ public class ItemStackUtil {
 
         return result.toArray(new String[0]);
     }
-
-    public static ItemStack loadStackFromJson(JsonObject json) {
+    public static ItemStack loadStackFromJson(JsonElement json) {
+        if (json instanceof JsonObject)
+            return loadStackFromJsonObject(json.getAsJsonObject());
+        else
+            return ItemStack.EMPTY;
+    }
+    public static ItemStack loadStackFromJsonObject(JsonObject json) {
         // Adapted from net.minecraftforge.common.crafting.CraftingHelper::getItemStack
         String itemName = json.get("item").getAsString();
 

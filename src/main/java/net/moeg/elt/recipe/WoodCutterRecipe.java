@@ -4,7 +4,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.recipe.*;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
@@ -20,7 +23,7 @@ public class WoodCutterRecipe implements Recipe<WoodCutterBlockEntity> {
     private final Ingredient input;
     private final DefaultedList<Ingredient> tools;
 
-    public WoodCutterRecipe(Identifier id,ItemStack output, ItemStack output2, Ingredient input, DefaultedList<Ingredient> tools) {
+    public WoodCutterRecipe(Identifier id, ItemStack output, ItemStack output2, Ingredient input, DefaultedList<Ingredient> tools) {
         this.output = output;
         this.id = id;
         this.output2 = output2;
@@ -42,23 +45,52 @@ public class WoodCutterRecipe implements Recipe<WoodCutterBlockEntity> {
 
     @Override
     public ItemStack craft(WoodCutterBlockEntity inv) {
-        ItemStack inv1 = inv.getStack(3);
-        ItemStack inv2 = inv.getStack(4);
-        if (ItemStack.areItemsEqual(inv1, output) && inv1.getCount() < inv1.getMaxCount() + output.getCount()) {
-            inv1.increment(output.getCount());
+        ItemStack inv0 = inv.getStack(0);
+        ItemStack inv1 = inv.getStack(1);
+        ItemStack inv2 = inv.getStack(2);
+        ItemStack inv3 = inv.getStack(3);
+        ItemStack inv4 = inv.getStack(4);
+        if (ItemStack.areItemsEqual(inv3, output) && inv3.getCount() < inv3.getMaxCount() + output.getCount()) {
+            inv3.increment(output.getCount());
+        } else if (inv3.isEmpty()) {
+            inv.setStack(3, output.copy());
         }
-        else if (inv1.isEmpty()){
-            inv.setStack(3,output.copy());
+        if (ItemStack.areItemsEqual(inv4, output2) && inv4.getCount() < inv4.getMaxCount() + output2.getCount()) {
+            inv4.increment(output2.getCount());
+        } else if (inv4.isEmpty()) {
+            inv.setStack(4, output.copy());
         }
-        if (ItemStack.areItemsEqual(inv2, output2) && inv2.getCount() < inv2.getMaxCount() + output2.getCount()) {
-            inv2.increment(output2.getCount());
+        if (inv0.getTag() != null && inv0.getTag().contains("TEST")) {
+            int t = inv0.getTag().getInt("TEST");
+            inv0.getTag().putInt("TEST", t - 1);
+            if (t <= 1) {
+                inv.setStack(0, ItemStack.EMPTY);
+            }
+        } else {
+            inv0.setCount(inv0.getCount() - 1);
         }
-        else if (inv2.isEmpty()){
-            inv.setStack(4,output.copy());
+        if (tools.size()==2){
+            damage(inv1);
+            damage(inv2);
+        }
+        else if (tools.size()==1){
+            if (!inv1.isEmpty()&&tools.get(0).test(inv1)){
+                damage(inv1);
+            }
+            else if (!inv2.isEmpty()&&tools.get(0).test(inv2)){
+                damage(inv2);
+            }
         }
         return ItemStack.EMPTY;
     }
-
+    private void damage(ItemStack i){
+        if (!i.isEmpty()){
+            i.setDamage(i.getDamage()+1);
+            if (i.getDamage()>=i.getMaxDamage()){
+                i.setCount(i.getCount()-1);
+            }
+        }
+    }
     @Override
     public boolean fits(int width, int height) {
         return true;
@@ -73,7 +105,8 @@ public class WoodCutterRecipe implements Recipe<WoodCutterBlockEntity> {
     public Identifier getId() {
         return id;
     }
-    public static RecipeType<WoodCutterRecipe> WOOD_CUTTER = Registry.register(Registry.RECIPE_TYPE,new Identifier("elt:woofcutter"), new RecipeType<WoodCutterRecipe>() {
+
+    public static RecipeType<WoodCutterRecipe> WOOD_CUTTER = Registry.register(Registry.RECIPE_TYPE, new Identifier("elt:woofcutter"), new RecipeType<WoodCutterRecipe>() {
         public String toString() {
             return "woofcutter";
         }
@@ -93,11 +126,11 @@ public class WoodCutterRecipe implements Recipe<WoodCutterBlockEntity> {
     public static class Serializer implements RecipeSerializer<WoodCutterRecipe> {
         public WoodCutterRecipe read(Identifier identifier, JsonObject jsonObject) {
             return new WoodCutterRecipe(identifier,
-                    ItemStackUtil.loadStackFromJson(jsonObject.get("output").getAsJsonObject()),
-                    ItemStackUtil.loadStackFromJson(jsonObject.get("output2").getAsJsonObject()),
+                    ItemStackUtil.loadStackFromJson(jsonObject.get("output")),
+                    ItemStackUtil.loadStackFromJson(jsonObject.get("output2")),
                     Ingredient.fromJson(jsonObject.get("input")),
                     getIngredients(jsonObject.get("tools").getAsJsonArray())
-                    );
+            );
         }
 
         private static DefaultedList<Ingredient> getIngredients(JsonArray json) {

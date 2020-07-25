@@ -1,28 +1,23 @@
 package net.moeg.elt.gui;
 
-import com.google.common.collect.Lists;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.recipe.CraftingRecipe;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.recipe.StonecuttingRecipe;
-import net.minecraft.screen.*;
+import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.world.World;
-import net.moeg.elt.ELT_Main;
 import net.moeg.elt.blockentity.WoodCutterBlockEntity;
 import net.moeg.elt.handlers.Handler_Items;
 import net.moeg.elt.handlers.ScreenHandlerTypeELT;
 import net.moeg.elt.recipe.WoodCutterRecipe;
 
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Optional;
 
 public class WoodCutterScreenHandler extends ScreenHandler implements NamedScreenHandlerFactory {
@@ -30,6 +25,7 @@ public class WoodCutterScreenHandler extends ScreenHandler implements NamedScree
     final Slot toolSlot1;
     final Slot toolSlot2;
     final Slot outputSlot1;
+    final Slot outputSlot2;
     final Inventory inv;
     private final ScreenHandlerContext context;
 //    private final ScreenHandlerFactory baseFactory;
@@ -55,7 +51,6 @@ public class WoodCutterScreenHandler extends ScreenHandler implements NamedScree
         this.inv = inv;
         inv.onOpen(playerInventory.player);
         System.out.println(playerInventory.player.currentScreenHandler);
-        playerInventory.player.currentScreenHandler = this;
         this.inputSlot = this.addSlot(new Slot(inv, 0, 45, 16) {
             public boolean canInsert(ItemStack stack) {
                 return true;
@@ -76,7 +71,11 @@ public class WoodCutterScreenHandler extends ScreenHandler implements NamedScree
             public boolean canInsert(ItemStack stack) {
                 return false;
             }
-
+        });
+        this.outputSlot2 = this.addSlot(new Slot(inv, 4, 98, 16+18) {
+            public boolean canInsert(ItemStack stack) {
+                return false;
+            }
         });
 
         int k;
@@ -94,47 +93,40 @@ public class WoodCutterScreenHandler extends ScreenHandler implements NamedScree
 
     @Override
     public boolean onButtonClick(PlayerEntity player, int id) {
-        Optional<WoodCutterRecipe> optional = player.world.getServer().getRecipeManager().getFirstMatch(WoodCutterRecipe.WOOD_CUTTER, (WoodCutterBlockEntity)inv, player.world);
-        optional.ifPresent(i->{
-            i.craft((WoodCutterBlockEntity)inv);
+        Optional<WoodCutterRecipe> optional = player.world.getServer().getRecipeManager().getFirstMatch(WoodCutterRecipe.WOOD_CUTTER, (WoodCutterBlockEntity) inv, player.world);
+        optional.ifPresent(i -> {
+            i.craft((WoodCutterBlockEntity) inv);
         });
-        System.out.println("Clicked");
+        return true;
 //        ItemStack result = new ItemStack(Items.OAK_LOG);
 //        if (inputSlot.getStack().isEmpty() || (toolSlot1.getStack().isEmpty() && toolSlot2.getStack().isEmpty())) {
 //            return false;
 //        } else {
 //            if (inputSlot.getStack().getItem() == Handler_Items.OAK_BRANCH) {
-//                System.out.println("has branch");
-//                this.context.run((world, blockPos) -> {
-//                    System.out.println("Context run");
 //
-//                    inputSlot.getStack().decrement(1);
-//                    if (inputSlot.getStack().isEmpty()) {
-//                        inputSlot.setStack(ItemStack.EMPTY);
-//                    }
-//                    if (outputSlot1.getStack().getItem() == Items.AIR)
-//                        this.outputSlot1.setStack(result.copy());
-//                    else {
-//                        outputSlot1.getStack().increment(1);
-//                    }
-//                    outputSlot1.markDirty();
-//                    this.sendContentUpdates();
-//                });
+//                inputSlot.getStack().decrement(1);
+//                if (inputSlot.getStack().isEmpty()) {
+//                    inputSlot.setStack(ItemStack.EMPTY);
+//                }
+//                if (outputSlot1.getStack().getItem() == Items.AIR)
+//                    this.outputSlot1.setStack(result.copy());
+//                else {
+//                    outputSlot1.getStack().increment(1);
+//                }
+//                outputSlot1.markDirty();
+//                this.sendContentUpdates();
 //                return true;
-//            }
-//            else
-//            {
-//                System.out.println("no branch");
+//            } else {
 //                return false;
 //            }
 //        }
-        return true;
     }
 
     @Override
     public boolean canUse(PlayerEntity player) {
         return true;
     }
+
     public ItemStack transferSlot(PlayerEntity player, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
         return itemStack;
