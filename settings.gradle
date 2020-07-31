@@ -8,3 +8,6 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+include 'eltcore'
+project(':eltcore').projectDir = new File('../eltcore');
