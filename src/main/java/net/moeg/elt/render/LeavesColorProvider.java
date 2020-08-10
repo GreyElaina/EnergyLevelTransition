@@ -10,7 +10,7 @@ import net.minecraft.world.BlockRenderView;
 
 import javax.annotation.Nullable;
 
-import static net.moeg.elt.api.data.CS.WHITE;
+import static net.moeg.eltcore.data.CS.*;
 
 @Environment(EnvType.CLIENT)
 public class LeavesColorProvider implements BlockColorProvider {

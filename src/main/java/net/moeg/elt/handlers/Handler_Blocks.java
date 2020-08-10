@@ -12,8 +12,7 @@ import net.moeg.elt.blocks.ExampleBlock;
 import net.moeg.elt.blocks.WoodCutterBlock;
 
 import static net.moeg.elt.ELT_Main.*;
-import static net.moeg.elt.api.data.CS.F;
-import static net.moeg.elt.api.data.CS.T;
+import static net.moeg.eltcore.data.CS.*;
 
 /**
  * 这是一个用来注册方块的类

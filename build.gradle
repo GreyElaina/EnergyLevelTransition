@@ -19,31 +19,43 @@ repositories {
 	maven {
 		url = 'https://raw.githubusercontent.com/Devan-Kerman/Devan-Repo/master/'
 	}
+	maven {
+		name = "Ladysnake Libs"
+		url = 'https://dl.bintray.com/ladysnake/libs'
+	}
 }
 
 dependencies {
+
+	// ELT Core
 	compile project(':eltcore')
+
 	// Some annotations
 	compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
 
-	// to change the versions see the gradle.properties file
+	// Minecraft
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	// Fabric API
+	// Fabric Loader and API
+	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	
+
 	// Ingame compile mods
 	modCompile "me.shedaniel:RoughlyEnoughItems:4.8.1"
 	modCompile "io.github.prospector:modmenu:1.14.0+build.23"
 
-	// Libs
-	//modImplementation "io.github.cottonmc:LibGui:2.2.0+1.16.1"
+	// LibGUI
+	// modImplementation "io.github.cottonmc:LibGui:2.2.0+1.16.1"
+	// include "io.github.cottonmc:LibGui:2.2.0+1.16.1"
+
+	// ARRP
 	modImplementation group: 'net.devtech', name: 'arrp', version: '0.2.4'
 	include group: 'net.devtech', name: 'arrp', version: '0.2.4'
 
-
+	// Cardinal Components
+	modCompile "io.github.onyxstudios:Cardinal-Components-API:${project.cardinal_components_version}"
+	include "io.github.onyxstudios:Cardinal-Components-API:${project.cardinal_components_version}"
 
 }
 
