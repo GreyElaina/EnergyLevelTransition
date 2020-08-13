@@ -1,6 +1,8 @@
 [English](README.md)  [简体中文](README-zh_cn.md)
 
-# Energy Level Transition 1.16 ![Build](https://github.com/MoegTech/EnergyLevelTransition/workflows/Build/badge.svg) 
+# Energy Level Transition 1.16 
+
+![Build](https://github.com/MoegTech/EnergyLevelTransition/workflows/Build/badge.svg) 
 
 This is the development repository of the Minecraft Fabric Mod - Energy Level Transition on Minecraft 1.16
 
@@ -15,8 +17,6 @@ This Mod is available under the MIT License.
 - [Table Of Contents](#table-of-contents)
 - [Introduction](#introduction)
 - [Dependencies](#dependencies)
-- [About Development](#about-development)
-- [Features](#features)
 - [Development Guide](#development-guide)
   - [Setup](#setup)
   - [How to Build](#how-to-build)
@@ -27,6 +27,7 @@ This is a Tech Mod - which illustrates Realism with hidden Magical Elements - of
 
 # Dependencies
 
+- ELT Core
 - Cardinal Components API
 - Lib GUI
 - Advanced Runtime Resource Pack
