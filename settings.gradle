@@ -1,3 +1,5 @@
+import com.sun.javafx.fxml.PropertyNotFoundException
+
 pluginManagement {
     repositories {
         jcenter()
@@ -9,5 +11,15 @@ pluginManagement {
     }
 }
 
-include 'eltcore'
-project(':eltcore').projectDir = new File('../eltcore');
+rootProject.name = 'EnergyLevelTransition-1.16'
+
+def propFile = new File(rootProject.projectDir.getPath() + File.separator + 'gradle.properties')
+def properties = new Properties()
+if (propFile.exists())
+    properties.load(new StringReader(propFile.getText('UTF-8')))
+if (properties.containsKey('EltCoreProjectPath')) {
+    include 'EltCore'
+    project(':EltCore').projectDir = new File(properties.getProperty('EltCoreProjectPath'))
+} else {
+    throw new PropertyNotFoundException('Missing necassary property "EltCoreProjectPath" in ' + propFile.getAbsolutePath())
+}
