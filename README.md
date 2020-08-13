@@ -4,6 +4,8 @@
 
 This is the development repository of the Minecraft Fabric Mod - Energy Level Transition on Minecraft 1.16
 
+Requires: [ELT Core](https://github.com/MoegTech/ELTCore)
+
 ## License
 
 This Mod is available under the MIT License. 
@@ -25,7 +27,6 @@ This is a Tech Mod - which illustrates Realism with hidden Magical Elements - of
 
 # Dependencies
 
-- ELT Core
 - Cardinal Components API
 - Lib GUI
 - Advanced Runtime Resource Pack
