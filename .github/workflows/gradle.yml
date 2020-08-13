@@ -39,6 +39,7 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+    - name: Cache Gradle
     - uses: burrunan/gradle-cache-action@v1
       name: Cache .gradle
       with:
@@ -49,8 +50,13 @@ jobs:
       run: chmod +x ./EltCore-1.16/gradlew && chmod +x ./ELT-1.16/gradlew
     - name: Build with Gradle
       run: cd ./ELT-1.16/ && ./gradlew build
-    - name: Upload a Build Artifact
+    - name: Upload a ELT Build Artifact
       uses: actions/upload-artifact@v2.0.1
       with:
-        name: ELT
-        path: build/libs
+        name: ELT Artifact
+        path: ./ELT-1.16/build/libs
+    - name: Upload a ELT-Core Build Artifact
+      uses: actions/upload-artifact@v2.0.1
+      with:
+        name: ELT-Core Artifact
+        path: ./EltCore-1.16/build/libs
