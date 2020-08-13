@@ -1,6 +1,7 @@
 [English](README.md)  [简体中文](README-zh_cn.md)
 
-# 能级跃迁 1.16 ![Build](https://github.com/MoegTech/EnergyLevelTransition/workflows/Build/badge.svg) 
+# 能级跃迁 1.16
+![Build](https://github.com/MoegTech/EnergyLevelTransition/workflows/Build/badge.svg) 
 
 This is the development repository of the Minecraft Fabric Mod - Energy Level Transition on Minecraft 1.16
 
@@ -11,35 +12,34 @@ This Mod is available under the MIT License.
 # 目录
 
 - [能级跃迁 1.16](#能级跃迁-116)
-  - [协议](#license)
-- [目录](#table-of-contents)
-- [Introduction](#introduction)
-- [Dependencies](#dependencies)
-- [About Development](#about-development)
-- [Features](#features)
-- [Development Guide](#development-guide)
-  - [Setup](#setup)
-  - [How to Build](#how-to-build)
+  - [协议](#协议)
+- [目录](#目录)
+- [模组介绍](#模组介绍)
+- [依赖](#依赖)
+- [开发指南](#开发指南)
+  - [准备](#准备)
+  - [如何构建](#如何构建)
   
-# Introduction
+# 模组介绍
 
 This is a Tech Mod - which illustrates Realism with hidden Magical Elements - of World Generation, Natural Environment, Player Properties, and more. 
 
-# Dependencies
+# 依赖
 
+- ELT Core
 - Cardinal Components API
 - Lib GUI
 - Advanced Runtime Resource Pack
 
 They are Jar-in-Jar with the mod so users don't need to download them separately. 
 
-# Development Guide
+# 开发指南
 
-## Setup
+## 准备
 
 For setup instructions of Fabric Mod please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
 
-## How to Build
+## 如何构建
 
 如果你在使用 Windows，使用以下格式运行Gradle任务
 
