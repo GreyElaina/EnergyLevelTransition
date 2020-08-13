@@ -4,13 +4,17 @@
 
 This is the development repository of the Minecraft Fabric Mod - Energy Level Transition on Minecraft 1.16
 
+## License
+
+This Mod is available under the MIT License. 
+
 # Table Of Contents
 
 - [Energy Level Transition 1.16](#energy-level-transition-116)
+  - [License](#license)
 - [Table Of Contents](#table-of-contents)
 - [Introduction](#introduction)
 - [Dependencies](#dependencies)
-- [License](#license)
 - [About Development](#about-development)
 - [Features](#features)
 - [Development Guide](#development-guide)
@@ -29,10 +33,6 @@ This is a Tech Mod - which illustrates Realism with hidden Magical Elements - of
 
 They are Jar-in-Jar with the mod so users don't need to download them separately. 
 
-## License
-
-This Mod is available under the MIT License. 
-
 # Development Guide
 
 ## Setup
@@ -40,6 +40,14 @@ This Mod is available under the MIT License.
 For setup instructions of Fabric Mod please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
 
 ## How to Build
+
+If you are using Windows, use the following style
+
+```gradlew <task>```
+
+or if you're using Linux/Unix:
+
+```./gradlew <task>```
 
 1. Clone ELT Base mod: https://github.com/MoegTech/EnergyLevelTransition.git
 
@@ -58,21 +66,3 @@ For setup instructions of Fabric Mod please see the [fabric wiki page](https://f
 8. Run `gradlew genSources` under `ELT-1.16` directory to generate MC sources for reference. 
 
 9. Run 'gradlew build' under 'ELT-1.16' direcotry to build artifacts in both `./ELT_Project/ELT-1.16/build/libs` and `./ELT_Project/EltCore-1.16/build/libs`
-
-1. 克隆ELT本体：https://github.com/MoegTech/EnergyLevelTransition.git
-
-2. 克隆ELTCore：https://github.com/MoegTech/ELTCore.git
-
-3. 你现在应该有两个下载好的压缩包，解压后将两个文件夹命名为ELT-1.16和EltCore-1.16
-
-4. 创建一个新文件夹，命名为ELT_Project，这将是整个ELT的项目目录
-
-5. 将ELT-1.16和EltCore-1.16文件夹放入ELT_Project目录下
-
-6. 使用IntelliJ或者Eclipse的Import功能，选择ELT文件夹内的build.gradle文件，导入项目。（Eclipse在进入后可能要使用gradlew eclipse）
-
-7. 等待Gradle项目同步完成
-
-8. 在ELT目录下运行gradlew genSources生成MC源码以供参考
-
-9. 在ELT目录下运行gradlew build，则会在ELT_Project/ELT-1.16/build/libs/和EltCore-1.16/build/lib生成两个模组的jar
