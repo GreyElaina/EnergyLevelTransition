@@ -1,7 +1,6 @@
 [English](README.md)  [简体中文](README-zh_cn.md)
 
-# 能级跃迁 1.16
-![Build](https://github.com/MoegTech/EnergyLevelTransition/workflows/Build/badge.svg) 
+# 能级跃迁 1.16 ![Build](https://github.com/MoegTech/EnergyLevelTransition/workflows/ELT%20Snapshot%20Build/badge.svg) 
 
 This is the development repository of the Minecraft Fabric Mod - Energy Level Transition on Minecraft 1.16
 
