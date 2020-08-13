@@ -1,4 +1,4 @@
-import com.sun.javafx.fxml.PropertyNotFoundException
+// import com.sun.javafx.fxml.PropertyNotFoundException
 
 pluginManagement {
     repositories {
@@ -21,5 +21,5 @@ if (properties.containsKey('EltCoreProjectPath')) {
     include 'EltCore'
     project(':EltCore').projectDir = new File(properties.getProperty('EltCoreProjectPath'))
 } else {
-    throw new PropertyNotFoundException('Missing necassary property "EltCoreProjectPath" in ' + propFile.getAbsolutePath())
+    println ('Missing necassary property "EltCoreProjectPath" in ' + propFile.getAbsolutePath())
 }

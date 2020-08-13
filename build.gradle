@@ -1,4 +1,4 @@
-import com.sun.javafx.fxml.PropertyNotFoundException
+// import com.sun.javafx.fxml.PropertyNotFoundException
 
 plugins {
 	id 'fabric-loom' version '0.4-SNAPSHOT'
@@ -31,7 +31,7 @@ dependencies {
 	if (project.hasProperty('EltCoreProjectPath')) {
 		compile project(':EltCore')
 	} else {
-		throw new PropertyNotFoundException('Missing necassary property "EltCoreProjectPath" ')
+		println ('Missing necassary property "EltCoreProjectPath" ')
 		//compile(maven repo wip)
 	}
 
