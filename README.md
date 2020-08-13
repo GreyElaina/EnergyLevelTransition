@@ -2,7 +2,7 @@
 
 # Energy Level Transition 1.16 
 
-![Build](https://github.com/MoegTech/EnergyLevelTransition/workflows/Build/badge.svg) 
+![Build](https://github.com/MoegTech/EnergyLevelTransition/workflows/ELT%20Snapshot%20Build/badge.svg) 
 
 This is the development repository of the Minecraft Fabric Mod - Energy Level Transition on Minecraft 1.16
 
