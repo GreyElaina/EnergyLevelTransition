@@ -47,13 +47,13 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	// Implementation
-	modImplementation "me.shedaniel:RoughlyEnoughItems:4.8.1"
-	modImplementation "io.github.prospector:modmenu:1.14.0+build.23"
+	modImplementation("me.shedaniel:RoughlyEnoughItems:5.2.3") {exclude module: 'fabric-api'}
+	modImplementation("io.github.prospector:modmenu:1.14.6+build.31") {exclude module: 'fabric-api'}
 
 	// Used Libraries
-	include(modCompile(group: 'net.devtech', name: 'arrp', version: '0.2.4'))
-	include(modCompile("io.github.cottonmc:LibGui:2.2.0+1.16.1"))
-	include(modCompile("io.github.onyxstudios:Cardinal-Components-API:2.4.2"))
+	include(modCompile(group: 'net.devtech', name: 'arrp', version: '0.2.4')) {exclude module: 'fabric-api'}
+//	include(modCompile("io.github.cottonmc:LibGui:2.2.0+1.16.1")) {exclude module: 'fabric-api'}
+	include(modCompile("io.github.onyxstudios:Cardinal-Components-API:2.5.0")) {exclude module: 'fabric-api'}
 
 }
 

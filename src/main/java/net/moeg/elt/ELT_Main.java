@@ -12,7 +12,6 @@ import net.moeg.elt.blockentity.WoodCutterBlockEntity;
 import net.moeg.elt.handlers.Handler_Blocks;
 import net.moeg.elt.handlers.Handler_Items;
 import net.moeg.elt.handlers.ScreenHandlerTypeELT;
-import net.moeg.elt.items.ItemGroups_ELT;
 import net.moeg.elt.recipe.WoodCutterRecipe;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,7 +29,6 @@ public class ELT_Main implements ModInitializer {
     /**
      * Load the ItemGroups
      */
-    public static final ItemGroups_ELT ITEM_GROUPS_ELT = new ItemGroups_ELT();
     public static RecipeSerializer<WoodCutterRecipe> WOOD_CUTTER_RECIPE = Registry.register(Registry.RECIPE_SERIALIZER, "elt:woodcutter", new WoodCutterRecipe.Serializer());
     public static JLang EN_US = JLang.lang();
     public static JLang ZH_CN = JLang.lang();

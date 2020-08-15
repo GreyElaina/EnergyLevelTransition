@@ -14,7 +14,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import net.moeg.elt.ELT_Main;
 import net.moeg.elt.blockentity.WoodCutterBlockEntity;
-import net.moeg.elt.util.ItemStackUtil;
+import net.moeg.eltcore.util.ItemStackUtil;
 
 public class WoodCutterRecipe implements Recipe<WoodCutterBlockEntity> {
     public static RecipeType<WoodCutterRecipe> WOOD_CUTTER = Registry.register(Registry.RECIPE_TYPE, new Identifier("elt:woofcutter"), new RecipeType<WoodCutterRecipe>() {

@@ -66,3 +66,13 @@ or if you're using Linux/Unix:
 8. Run `gradlew genSources` under `ELT-1.16` directory to generate MC sources for reference. 
 
 9. Run 'gradlew build' under 'ELT-1.16' direcotry to build artifacts in both `./ELT_Project/ELT-1.16/build/libs` and `./ELT_Project/EltCore-1.16/build/libs`
+
+## Note on updating MC version and depedencies
+
+1. Run `gradlew migrateMappings <version>` before building with a new version to get `remappedSrc` folder. Use the remapped source to replace the existing source. 
+ 
+2. Run `gradlew clean --refresh-dependencies` to refresh dependencies if anything went wrong.
+
+3. Run `gradlew cleanLoom` to clean Loom cache. 
+
+4. Delete the `{%USER-HOME%}/.gradle/caches/fabric-loom` folder if the environment really screwed up.
