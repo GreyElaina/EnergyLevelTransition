@@ -1,3 +1,14 @@
+/*
+ * Copyright (c) 2020. TeamMoeg
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
 package net.moeg.elt.recipe;
 
 import com.google.gson.JsonArray;
@@ -149,10 +160,10 @@ public class WoodCutterRecipe implements Recipe<WoodCutterBlockEntity> {
             ItemStack output2 = packetByteBuf.readItemStack();
             Ingredient input = Ingredient.fromPacket(packetByteBuf);
             DefaultedList<Ingredient> tools = DefaultedList.of();
-            for (int i =0;i<packetByteBuf.readShort();i++){
+            for (int i = 0; i < packetByteBuf.readShort(); i++) {
                 tools.add(Ingredient.fromPacket(packetByteBuf));
             }
-            return new WoodCutterRecipe(identifier,output,output2,input,tools);
+            return new WoodCutterRecipe(identifier, output, output2, input, tools);
         }
 
         public void write(PacketByteBuf packetByteBuf, WoodCutterRecipe recipe) {
@@ -160,7 +171,7 @@ public class WoodCutterRecipe implements Recipe<WoodCutterBlockEntity> {
             packetByteBuf.writeItemStack(recipe.output2);
             recipe.input.write(packetByteBuf);
             packetByteBuf.writeShort(recipe.tools.size());
-            for (Ingredient i : recipe.tools){
+            for (Ingredient i : recipe.tools) {
                 i.write(packetByteBuf);
             }
         }

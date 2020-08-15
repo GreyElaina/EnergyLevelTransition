@@ -1,3 +1,14 @@
+/*
+ * Copyright (c) 2020. TeamMoeg
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
 package net.moeg.elt.blocks;
 
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
@@ -6,7 +17,6 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stat.Stats;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -16,7 +26,6 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.moeg.elt.blockentity.WoodCutterBlockEntity;
-import net.moeg.elt.recipe.WoodCutterRecipe;
 
 import javax.annotation.Nullable;
 
@@ -65,9 +74,9 @@ public class WoodCutterBlock extends BlockWithEntity {
     @Override
     public void afterBreak(World world, PlayerEntity player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack stack) {
         super.afterBreak(world, player, pos, state, blockEntity, stack);
-        if (blockEntity instanceof WoodCutterBlockEntity){
-            ((WoodCutterBlockEntity) blockEntity).getInvStackList().forEach(i->{
-                Block.dropStack(world,pos,i);
+        if (blockEntity instanceof WoodCutterBlockEntity) {
+            ((WoodCutterBlockEntity) blockEntity).getInvStackList().forEach(i -> {
+                Block.dropStack(world, pos, i);
             });
         }
     }

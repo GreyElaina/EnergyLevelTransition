@@ -1,3 +1,14 @@
+/*
+ * Copyright (c) 2020. TeamMoeg
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
 package net.moeg.elt.gui;
 
 import net.minecraft.entity.player.PlayerEntity;
@@ -104,14 +115,13 @@ public class WoodCutterScreenHandler extends ScreenHandler implements NamedScree
     }
 
     public ItemStack transferSlot(PlayerEntity player, int index) {
-        Slot slot = (Slot)this.slots.get(index);
+        Slot slot = this.slots.get(index);
         ItemStack itemStack = ItemStack.EMPTY;
         if (slot != null && slot.hasStack()) {
-             itemStack = slot.getStack();
-            if(index>=5&&!this.insertItem(itemStack,0,3,false)){
+            itemStack = slot.getStack();
+            if (index >= 5 && !this.insertItem(itemStack, 0, 3, false)) {
                 return ItemStack.EMPTY;
-            }
-            else if(index<5&&!this.insertItem(itemStack,5,5+36,false)){
+            } else if (index < 5 && !this.insertItem(itemStack, 5, 5 + 36, false)) {
                 return ItemStack.EMPTY;
             }
         }
