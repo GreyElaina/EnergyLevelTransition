@@ -28,3 +28,12 @@ bin/
 # fabric
 
 run/
+remappedSrc/
+
+# apple
+
+**/.DS_Store
+
+# project
+
+private.properties

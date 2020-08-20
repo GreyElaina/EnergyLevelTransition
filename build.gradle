@@ -1,8 +1,44 @@
+/*
+ * Copyright (c) 2020. TeamMoeg
+ *
+ * This file is part of Energy Level Transition.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to deal
+ *  in the Software without restriction, including without limitation the rights to
+ *  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+ *   of the Software, and to permit persons to whom the Software is furnished to
+ *   do so, subject to the following conditions:
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ *  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ *  WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ *  PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
+ *  OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+ *  OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ *  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ *  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ *  You should have received a copy of the MIT License
+ *  along with GregTech. If not, see <https://opensource.org/licenses/MIT>.
+ */
+
 // import com.sun.javafx.fxml.PropertyNotFoundException
 
 plugins {
 	id 'fabric-loom' version '0.4-SNAPSHOT'
 	id 'maven-publish'
+}
+
+def privateProperties = new Properties();
+
+String maven_username = 'unknown'
+String maven_password = 'unknown'
+
+if (project.file('private.properties').exists()) {
+	privateProperties.load(new StringReader(project.file('private.properties').getText('UTF-8')))
+	maven_username = privateProperties.getOrDefault('maven_username', 'unknown')
+	maven_password = privateProperties.getOrDefault('maven_password', 'unknown')
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -101,7 +137,13 @@ publishing {
 
 	// select the repositories you want to publish to
 	repositories {
-		// uncomment to publish to the local maven
-		// mavenLocal()
+		maven{
+			name = "archive"
+			url = "http://maven2.jihuayu.site/releases"
+			credentials {
+				username = maven_username
+				password = maven_password
+			}
+		}
 	}
 }
