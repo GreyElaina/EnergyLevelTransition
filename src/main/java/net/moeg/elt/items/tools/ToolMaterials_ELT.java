@@ -1,26 +1,19 @@
 /*
- * Copyright (c) 2020. TeamMoeg
+ *  Copyright (c) 2020. TeamMoeg
  *
- * This file is part of Energy Level Transition.
+ *  This file is part of Energy Level Transition.
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- *  of this software and associated documentation files (the "Software"), to deal
- *  in the Software without restriction, including without limitation the rights to
- *  use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- *   of the Software, and to permit persons to whom the Software is furnished to
- *   do so, subject to the following conditions:
+ *  Energy Level Transition is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, version 3.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- *  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
- *  WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
- *  PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
- *  OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- *  OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
- *  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
- *  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *   Energy Level Transition is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- *  You should have received a copy of the MIT License
- *  along with GregTech. If not, see <https://opensource.org/licenses/MIT>.
+ *  You should have received a copy of the GNU General Public License
+ *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package net.moeg.elt.items.tools;
