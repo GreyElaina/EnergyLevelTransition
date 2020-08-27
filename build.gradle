@@ -53,6 +53,10 @@ repositories {
 		name = "Ladysnake Libs"
 		url = 'https://dl.bintray.com/ladysnake/libs'
 	}
+	maven {
+		name = "BuildCraft"
+		url = "https://mod-buildcraft.com/maven"
+	}
 }
 
 dependencies {
@@ -81,9 +85,9 @@ dependencies {
 
 	// Used Libraries
 	include(modCompile(group: 'net.devtech', name: 'arrp', version: '0.2.4')) {exclude module: 'fabric-api'}
-//	include(modCompile("io.github.cottonmc:LibGui:2.2.0+1.16.1")) {exclude module: 'fabric-api'}
+	include(modCompile("io.github.cottonmc:LibGui:3.0.0-beta.1+1.16.2-rc2")) {exclude module: 'fabric-api'}
 	include(modCompile("io.github.onyxstudios:Cardinal-Components-API:2.5.0")) {exclude module: 'fabric-api'}
-
+	include(modCompile("alexiil.mc.lib:libblockattributes-all:0.8.1")) {exclude module: 'fabric-api'}
 }
 
 processResources {
