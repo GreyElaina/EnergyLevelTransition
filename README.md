@@ -8,7 +8,7 @@ Requires: [ELT Core](https://github.com/MoegTech/ELTCore)
 
 ## License
 
-This Mod is available under the MIT License. 
+This Mod is available under the GPLv3 License. 
 
 # Table Of Contents
 
