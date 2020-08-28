@@ -6,7 +6,7 @@ This is the development repository of the Minecraft Fabric Mod - Energy Level Tr
 
 ## 协议
 
-This Mod is available under the MIT License. 
+This Mod is available under the GPLv3 License. 
 
 # 目录
 
